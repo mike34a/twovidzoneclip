@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class MockHttpServerRequest extends HttpServerRequest {
 
-    public static MockHttpServerRequest getNewHttpServerRequest () {
-        return new MockHttpServerRequest(null, null, null, null, null);
+    public static MockHttpServerRequest getNewHttpServerRequest (String path, HttpServerResponse response) {
+        return new MockHttpServerRequest(null, null, path, null, response);
     }
 
     private MockHttpServerRequest(String method, String uri, String path, String query, HttpServerResponse response) {
