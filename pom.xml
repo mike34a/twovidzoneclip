@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.pmk</groupId>
     <artifactId>twovidzoneclip</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>twovidzoneclip Maven Webapp</name>
     <url>http://www.twovidzoneclip.com/</url>
@@ -12,6 +12,7 @@
         <restlet-freemarker-version>1.1.9</restlet-freemarker-version>
         <vertx-version>1.3.1.final</vertx-version>
         <couchbase-version>1.1.6</couchbase-version>
+        <junit-version>4.11</junit-version>
     </properties>
     <repositories>
         <repository>
@@ -33,8 +34,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <version>${junit-version}</version>
         </dependency>
         <dependency>
             <groupId>org.vert-x</groupId>
