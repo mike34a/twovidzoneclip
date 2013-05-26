@@ -1,1 +1,1 @@
-web: vertx run Main.java
+"web: vertx run Main.java" 
