@@ -2,6 +2,7 @@ package com.pmk.twovidzoneclip.main;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.ProvisionException;
 import com.pmk.twovidzoneclip.exception.DbException;
 import com.pmk.twovidzoneclip.handler.RestHandler;
 import com.pmk.twovidzoneclip.handler.WebHandler;
@@ -29,7 +30,7 @@ public final class VertxServer extends Verticle {
             // Catch all - serve the index page
             webHandler = injector.getInstance(WebHandler.class);
 
-        } catch (DbException e) {
+        } catch (ProvisionException e) {
             restHandler = new RestHandlerImpl(null);
             webHandler = new WebHandlerImpl();
         } finally {
