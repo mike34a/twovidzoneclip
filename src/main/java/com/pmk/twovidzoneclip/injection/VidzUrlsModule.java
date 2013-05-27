@@ -6,6 +6,7 @@ import com.couchbase.client.CouchbaseConnectionFactoryBuilder;
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.pmk.twovidzoneclip.exception.DbException;
 import com.pmk.twovidzoneclip.handler.RestHandler;
 import com.pmk.twovidzoneclip.handler.WebHandler;
 import com.pmk.twovidzoneclip.handler.impl.RestHandlerImpl;
@@ -33,25 +34,22 @@ public class VidzUrlsModule extends AbstractModule {
     @Provides
     VidzUrlsDAO provideVidzUrlsDao() {
         final URI uri = URI.create("http://127.0.0.1:8091/pools");
-        if (uri != null) {
-            List<URI> urls = Lists.newArrayList(uri);
+        List<URI> urls = Lists.newArrayList(uri);
 
-            CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
-            System.setProperty("viewmode", "development");
-            cfb.setOpTimeout(10000);
+        CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
+        System.setProperty("viewmode", "development");
+        cfb.setOpTimeout(10000);
 
-            final CouchbaseConnectionFactory cf;
-            try {
-                cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
-                CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
+        final CouchbaseConnectionFactory cf;
+        try {
+            cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
+            CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
 
-                return new VidzUrlsDAOImpl(couchbaseClient);
+            return new VidzUrlsDAOImpl(couchbaseClient);
 
-            } catch (IOException e) {
-                Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
-                throw new Error("Impossible de se connecter à la base de données");
-            }
+        } catch (Exception e) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
+            throw new DbException();
         }
-        return null;
     }
 }

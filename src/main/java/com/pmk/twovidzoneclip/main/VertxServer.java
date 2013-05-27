@@ -2,6 +2,7 @@ package com.pmk.twovidzoneclip.main;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.pmk.twovidzoneclip.exception.DbException;
 import com.pmk.twovidzoneclip.handler.RestHandler;
 import com.pmk.twovidzoneclip.handler.WebHandler;
 import com.pmk.twovidzoneclip.handler.impl.RestHandlerImpl;
@@ -16,16 +17,26 @@ public final class VertxServer extends Verticle {
 
     @Override
     public final void start() throws Exception {
+        RestHandler restHandler = null;
+        WebHandler webHandler = null;
         final RouteMatcher routeMatcher = new RouteMatcher();
+        try {
 
-        Injector injector = Guice.createInjector(new VidzUrlsModule());
+            Injector injector = Guice.createInjector(new VidzUrlsModule());
 
-        routeMatcher.get("/videoresources/:page/:numberOfResults", injector.getInstance(RestHandler.class));
+            restHandler = injector.getInstance(RestHandler.class);
 
-        // Catch all - serve the index page
-        routeMatcher.getWithRegEx(".*", injector.getInstance(WebHandler.class));
+            // Catch all - serve the index page
+            webHandler = injector.getInstance(WebHandler.class);
 
-        vertx.createHttpServer().requestHandler(
-                routeMatcher).listen(PORT_NUMBER);
+        } catch (DbException e) {
+            restHandler = new RestHandlerImpl(null);
+            webHandler = new WebHandlerImpl();
+        } finally {
+            routeMatcher.get("/videoresources/:page/:numberOfResults", restHandler);
+            routeMatcher.getWithRegEx(".*", webHandler);
+            vertx.createHttpServer().requestHandler(
+                    routeMatcher).listen(PORT_NUMBER);
+        }
     }
 }
