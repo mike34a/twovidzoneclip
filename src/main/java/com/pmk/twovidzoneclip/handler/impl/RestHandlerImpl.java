@@ -36,7 +36,9 @@ public final class RestHandlerImpl implements RestHandler {
             final String numberOfResultsStr = params.get(numberOfResultsKey);
 
             final String serializedVidzUrls = vidzUrls(pageStr, numberOfResultsStr);
-
+            
+            //final String serializedVidzUrls = "[{\"imageUrl\":\"<datasimage>\",\"soundUrl\":\"<datassound>\"},{\"imageUrl\":\"<datasimage2>\",\"soundUrl\":\"<datassound2>\"}]";
+ 
             req.response.write(serializedVidzUrls);
         }
     }
