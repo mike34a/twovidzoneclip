@@ -32,22 +32,26 @@ public class VidzUrlsModule extends AbstractModule {
 
     @Provides
     VidzUrlsDAO provideVidzUrlsDao() {
-        List<URI> urls = Lists.newArrayList(URI.create("http://127.0.0.1:8091/pools"));
+        final URI uri = URI.create("http://127.0.0.1:8091/pools");
+        if (uri != null) {
+            List<URI> urls = Lists.newArrayList(uri);
 
-        CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
-        System.setProperty("viewmode", "development");
-        cfb.setOpTimeout(10000);
+            CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
+            System.setProperty("viewmode", "development");
+            cfb.setOpTimeout(10000);
 
-        final CouchbaseConnectionFactory cf;
-        try {
-            cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
-            CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
+            final CouchbaseConnectionFactory cf;
+            try {
+                cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
+                CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
 
-            return new VidzUrlsDAOImpl(couchbaseClient);
+                return new VidzUrlsDAOImpl(couchbaseClient);
 
-        } catch (IOException e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
-            throw new Error("Impossible de se connecter à la base de données");
+            } catch (IOException e) {
+                Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
+                throw new Error("Impossible de se connecter à la base de données");
+            }
         }
+        return null;
     }
 }
