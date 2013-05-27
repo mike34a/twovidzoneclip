@@ -10,10 +10,7 @@ import com.google.gson.Gson;
 import com.pmk.twovidzoneclip.metier.VidzUrl;
 import com.pmk.twovidzoneclip.persistence.VidzUrlsDAO;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class VidzUrlsDAOImpl implements VidzUrlsDAO {
 
@@ -57,7 +54,7 @@ public class VidzUrlsDAOImpl implements VidzUrlsDAO {
     }
 
     @VisibleForTesting
-    Calendar dateFromStr(String dateStr) {
+    Date dateFromStr(String dateStr) {
         final String year = dateStr.substring(0, 4);
         final String month = dateStr.substring(4, 6);
         final String day = dateStr.substring(6, 8);
@@ -68,6 +65,6 @@ public class VidzUrlsDAOImpl implements VidzUrlsDAO {
 
         calendar.set(Integer.parseInt(year), (Integer.parseInt(month) - 1), Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minute));
 
-        return calendar;
+        return calendar.getTime();
     }
 }

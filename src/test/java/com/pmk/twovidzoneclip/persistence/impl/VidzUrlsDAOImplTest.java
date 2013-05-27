@@ -84,8 +84,8 @@ public class VidzUrlsDAOImplTest {
         calendar1.set(2013, 04, 27, 15, 36);
         final Calendar calendar2 = Calendar.getInstance();
         calendar2.set(2013, 04, 26, 16, 45);
-        final VidzUrl vidzUrl1 = new VidzUrl(calendar1, "lemonde.fr", "korben.info");
-        final VidzUrl vidzUrl2 = new VidzUrl(calendar2, "google.fr", "youtube.com");
+        final VidzUrl vidzUrl1 = new VidzUrl(calendar1.getTime(), "lemonde.fr", "korben.info");
+        final VidzUrl vidzUrl2 = new VidzUrl(calendar2.getTime(), "google.fr", "youtube.com");
 
         //WHEN
         final List<VidzUrl> urls = vidzUrlsDAO.getUrls(1, 10);
@@ -106,10 +106,10 @@ public class VidzUrlsDAOImplTest {
         vidzUrlsDAO = new VidzUrlsDAOImpl(couchbaseClient);
 
         //WHEN
-        final Calendar calculatedDate = vidzUrlsDAO.dateFromStr(dateStr);
+        final Date calculatedDate = vidzUrlsDAO.dateFromStr(dateStr);
 
         //THEN
-        assertThat(calculatedDate.getTime().toString()).isEqualTo(calendar1.getTime().toString());
+        assertThat(calculatedDate.toString()).isEqualTo(calendar1.getTime().toString());
     }
 
     private ViewResponse mockedViewRows() {

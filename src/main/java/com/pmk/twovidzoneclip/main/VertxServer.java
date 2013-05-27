@@ -7,18 +7,18 @@ import org.vertx.java.deploy.Verticle;
 
 public final class VertxServer extends Verticle {
 
-    private static final Integer portNumber = 8182;
+    private static final Integer PORT_NUMBER = 8182;
 
     @Override
     public final void start() throws Exception {
         final RouteMatcher routeMatcher = new RouteMatcher();
 
-        // Catch all - serve the index page
-        routeMatcher.get("/videoresources/:user/:id", new RestHandler());
+        routeMatcher.get("/videoresources/:page", new RestHandler());
 
+        // Catch all - serve the index page
         routeMatcher.getWithRegEx(".*", new WebHandler());
 
         vertx.createHttpServer().requestHandler(
-                routeMatcher).listen(portNumber);
+                routeMatcher).listen(PORT_NUMBER);
     }
 }

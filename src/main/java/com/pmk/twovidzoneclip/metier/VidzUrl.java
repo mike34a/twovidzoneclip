@@ -1,17 +1,18 @@
 package com.pmk.twovidzoneclip.metier;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class VidzUrl {
 
-    private transient Calendar date;
+    private transient Date date;
 
     private final String imageUrl;
 
     private final String soundUrl;
 
-    public VidzUrl(final Calendar date, final String imageUrl, final String soundUrl) {
+    public VidzUrl(final Date date, final String imageUrl, final String soundUrl) {
         this.date = date;
         this.imageUrl = imageUrl;
         this.soundUrl = soundUrl;
@@ -30,11 +31,11 @@ public class VidzUrl {
         return soundUrl;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -47,7 +48,7 @@ public class VidzUrl {
 
         return Objects.equals(vidzUrl.getImageUrl(), this.getImageUrl())
                 && Objects.equals(vidzUrl.getSoundUrl(), this.getSoundUrl())
-                && Objects.equals(vidzUrl.getDate().getTime().toString(), this.getDate().getTime().toString());
+                && Objects.equals(vidzUrl.getDate().toString(), this.getDate().toString());
     }
 
     @Override
