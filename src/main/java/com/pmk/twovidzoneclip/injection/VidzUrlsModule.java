@@ -7,7 +7,9 @@ import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.pmk.twovidzoneclip.handler.RestHandler;
+import com.pmk.twovidzoneclip.handler.WebHandler;
 import com.pmk.twovidzoneclip.handler.impl.RestHandlerImpl;
+import com.pmk.twovidzoneclip.handler.impl.WebHandlerImpl;
 import com.pmk.twovidzoneclip.persistence.VidzUrlsDAO;
 import com.pmk.twovidzoneclip.persistence.impl.VidzUrlsDAOImpl;
 import com.pmk.twovidzoneclip.service.VidzUrlsService;
@@ -20,9 +22,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class VidzUrlsModule extends AbstractModule {
+
     @Override
     protected void configure() {
         bind(RestHandler.class).to(RestHandlerImpl.class);
+        bind(WebHandler.class).to(WebHandlerImpl.class);
         bind(VidzUrlsService.class).to(VidzUrlsServiceImpl.class);
     }
 

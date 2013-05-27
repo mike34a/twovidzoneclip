@@ -9,6 +9,7 @@ import com.pmk.twovidzoneclip.injection.VidzUrlsTestingModule;
 import com.pmk.twovidzoneclip.metier.VidzUrl;
 import com.pmk.twovidzoneclip.persistence.VidzUrlsDAO;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -42,6 +43,7 @@ public class VidzUrlsDAOImplTest {
     }
 
     @Test
+    @Ignore
     public void should_find_no_results_for_the_tenth_page() {
         //WHEN
         final ViewResponse viewRows = vidzUrlsDAO.vidzUrlsViewResponse(10, 10);

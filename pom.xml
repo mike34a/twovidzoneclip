@@ -3,7 +3,6 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.pmk</groupId>
     <artifactId>twovidzoneclip</artifactId>
-    <packaging>jar</packaging>
     <version>0.1-SNAPSHOT</version>
     <name>twovidzoneclip Maven Webapp</name>
     <url>http://www.twovidzoneclip.com/</url>
@@ -57,7 +56,6 @@
             <groupId>couchbase</groupId>
             <artifactId>couchbase-client</artifactId>
             <version>${couchbase-version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
