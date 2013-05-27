@@ -1,17 +1,17 @@
 package com.pmk.twovidzoneclip.persistence.impl;
 
 import com.couchbase.client.CouchbaseClient;
-import com.couchbase.client.CouchbaseConnectionFactory;
-import com.couchbase.client.CouchbaseConnectionFactoryBuilder;
 import com.couchbase.client.protocol.views.*;
 import com.google.common.collect.Lists;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.pmk.twovidzoneclip.injection.VidzUrlsTestingModule;
 import com.pmk.twovidzoneclip.metier.VidzUrl;
-import junit.framework.Assert;
+import com.pmk.twovidzoneclip.persistence.VidzUrlsDAO;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -22,54 +22,32 @@ public class VidzUrlsDAOImplTest {
 
     private CouchbaseClient couchbaseClient;
 
-    private VidzUrlsDAOImpl vidzUrlsDAO;
+    private static VidzUrlsDAOImpl vidzUrlsDAO;
+
+    private static Injector injector;
+
+    @BeforeClass
+    public static void staticSetUp() {
+        injector = Guice.createInjector(new VidzUrlsTestingModule());
+        vidzUrlsDAO = (VidzUrlsDAOImpl)injector.getProvider(VidzUrlsDAO.class).get();
+    }
 
     @Test
     public void should_find_results_for_the_first_page() {
-        //GIVEN
-        List<URI> urls = Lists.newArrayList(URI.create("http://127.0.0.1:8091/pools"));
+        //WHEN
+        final ViewResponse viewRows = vidzUrlsDAO.vidzUrlsViewResponse(1, 10);
 
-        try {
-            CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
-            System.setProperty("viewmode", "development");
-            cfb.setOpTimeout(10000);
-            final CouchbaseConnectionFactory cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
-
-            couchbaseClient = new CouchbaseClient(cf);
-            vidzUrlsDAO = new VidzUrlsDAOImpl(couchbaseClient);
-
-            //WHEN
-            final ViewResponse viewRows = vidzUrlsDAO.vidzUrlsViewResponse(1, 10);
-
-            //THEN
-            assertThat(viewRows).isNotEmpty();
-        } catch (IOException e) {
-            Assert.fail(e.getMessage());
-        }
+        //THEN
+        assertThat(viewRows).isNotEmpty();
     }
 
     @Test
     public void should_find_no_results_for_the_tenth_page() {
-        //GIVEN
-        List<URI> urls = Lists.newArrayList(URI.create("http://127.0.0.1:8091/pools"));
+        //WHEN
+        final ViewResponse viewRows = vidzUrlsDAO.vidzUrlsViewResponse(10, 10);
 
-        try {
-            CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
-            System.setProperty("viewmode", "development");
-            cfb.setOpTimeout(10000);
-            final CouchbaseConnectionFactory cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
-
-            final CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
-            vidzUrlsDAO = new VidzUrlsDAOImpl(couchbaseClient);
-
-            //WHEN
-            final ViewResponse viewRows = vidzUrlsDAO.vidzUrlsViewResponse(10, 10);
-
-            //THEN
-            assertThat(viewRows).isNullOrEmpty();
-        } catch (IOException e) {
-            Assert.fail(e.getMessage());
-        }
+        //THEN
+        assertThat(viewRows).isNullOrEmpty();
     }
 
     @Test

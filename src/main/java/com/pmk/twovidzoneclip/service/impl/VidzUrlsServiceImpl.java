@@ -9,6 +9,7 @@ import com.pmk.twovidzoneclip.persistence.VidzUrlsDAO;
 import com.pmk.twovidzoneclip.persistence.impl.VidzUrlsDAOImpl;
 import com.pmk.twovidzoneclip.service.VidzUrlsService;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
@@ -19,24 +20,9 @@ public final class VidzUrlsServiceImpl implements VidzUrlsService {
 
     private VidzUrlsDAO vidzUrlsDAO;
 
+    @Inject
     public VidzUrlsServiceImpl(VidzUrlsDAO vidzUrlsDAO) {
         this.vidzUrlsDAO = vidzUrlsDAO;
-    }
-
-    public VidzUrlsServiceImpl() { List<URI> urls = Lists.newArrayList(URI.create("http://127.0.0.1:8091/pools"));
-
-            CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
-            System.setProperty("viewmode", "development");
-            cfb.setOpTimeout(10000);
-        final CouchbaseConnectionFactory cf;
-        try {
-            cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
-            CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
-
-            vidzUrlsDAO = new VidzUrlsDAOImpl(couchbaseClient);
-        } catch (IOException e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
-        }
     }
 
     @Override

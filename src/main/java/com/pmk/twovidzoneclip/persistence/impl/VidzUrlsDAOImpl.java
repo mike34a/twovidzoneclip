@@ -7,11 +7,14 @@ import com.couchbase.client.protocol.views.ViewResponse;
 import com.couchbase.client.protocol.views.ViewRow;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.gson.Gson;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.pmk.twovidzoneclip.metier.VidzUrl;
 import com.pmk.twovidzoneclip.persistence.VidzUrlsDAO;
 
 import java.util.*;
 
+@Singleton
 public class VidzUrlsDAOImpl implements VidzUrlsDAO {
 
     private final CouchbaseClient couchbaseClient;
