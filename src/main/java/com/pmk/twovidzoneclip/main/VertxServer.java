@@ -20,7 +20,7 @@ public final class VertxServer extends Verticle {
 
         Injector injector = Guice.createInjector(new VidzUrlsModule());
 
-        routeMatcher.get("/videoresources/:page", injector.getInstance(RestHandler.class));
+        routeMatcher.get("/videoresources/:page/:numberOfResults", injector.getInstance(RestHandler.class));
 
         // Catch all - serve the index page
         routeMatcher.getWithRegEx(".*", injector.getInstance(WebHandler.class));

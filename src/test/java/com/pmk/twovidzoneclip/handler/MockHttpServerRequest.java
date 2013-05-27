@@ -1,20 +1,29 @@
 package com.pmk.twovidzoneclip.handler;
 
+import com.google.common.collect.Maps;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.buffer.Buffer;
 import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.core.http.HttpServerResponse;
 
+import java.util.List;
 import java.util.Map;
 
 public class MockHttpServerRequest extends HttpServerRequest {
 
+    private Map<String, String> params;
+
     public static MockHttpServerRequest getNewHttpServerRequest (String path, HttpServerResponse response) {
-        return new MockHttpServerRequest(null, null, path, null, response);
+        return new MockHttpServerRequest(null, null, path, null, null, response);
     }
 
-    private MockHttpServerRequest(String method, String uri, String path, String query, HttpServerResponse response) {
+    public static MockHttpServerRequest getNewHttpServerRequest (String path, Map params, HttpServerResponse response) {
+        return new MockHttpServerRequest(null, null, path, params, null, response);
+    }
+
+    private MockHttpServerRequest(String method, String uri, String path, Map params, String query, HttpServerResponse response) {
         super(method, uri, path, query, response);
+        this.params = params;
     }
 
     @Override
@@ -24,7 +33,7 @@ public class MockHttpServerRequest extends HttpServerRequest {
 
     @Override
     public Map<String, String> params() {
-        return null;
+        return Maps.newHashMap(params);
     }
 
     @Override
