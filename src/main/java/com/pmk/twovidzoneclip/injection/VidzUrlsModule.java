@@ -6,6 +6,7 @@ import com.couchbase.client.CouchbaseConnectionFactoryBuilder;
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.pmk.twovidzoneclip.environment.DBAccess;
 import com.pmk.twovidzoneclip.exception.DbException;
 import com.pmk.twovidzoneclip.handler.RestHandler;
 import com.pmk.twovidzoneclip.handler.WebHandler;
@@ -33,23 +34,40 @@ public class VidzUrlsModule extends AbstractModule {
 
     @Provides
     VidzUrlsDAO provideVidzUrlsDao() {
-        final URI uri = URI.create("http://127.0.0.1:8091/pools");
+
+        final String addrStr = DBAccess.getDBUrl();
+        final String dbPort = DBAccess.getDbPort();
+        final String dbPassword = DBAccess.getDbPassword();
+
+        final String uriStr = addrStr != null && dbPort != null ?
+                String.format("http://%s:%s/pools", addrStr, dbPort) :
+                "http://127.0.0.1:8091/pools";
+
+        final URI uri = URI.create(uriStr);
         List<URI> urls = Lists.newArrayList(uri);
 
         CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
-        System.setProperty("viewmode", "development");
+
+        initViewMode();
+
         cfb.setOpTimeout(10000);
 
         final CouchbaseConnectionFactory cf;
         try {
-            cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", "");
+            cf = cfb.buildCouchbaseConnection(urls, "tvoc-videos-urls", dbPassword);
             CouchbaseClient couchbaseClient = new CouchbaseClient(cf);
 
             return new VidzUrlsDAOImpl(couchbaseClient);
 
-        } catch (Exception e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
+        } catch (IOException e) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, "Could not access to the database", e);
             throw new DbException();
+        }
+    }
+
+    private static void initViewMode() {
+        if (!System.getProperties().containsKey("viewmode")) {
+            System.setProperty("viewmode", "development");
         }
     }
 }
