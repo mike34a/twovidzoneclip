@@ -1,27 +1,46 @@
 // BEGIN THEME
 // -----------
 
-@import "Kickstrap/themes/simplex/variables.less";		
-@import "Kickstrap/themes/simplex/bootswatch.less";		
+@import "Kickstrap/themes/cerulean/variables.less";		
+@import "Kickstrap/themes/cerulean/bootswatch.less";		
 // Replace the path with any .less file in the 'themes' folder.
 
 // Tweak your current theme here, or comment-out the predefined theme from settings
 // and start fresh below.
 
-.navbar-inner {
-  background-color: #2c2c2c; /* fallback color, place your own */
 
-  /* Gradients for modern browsers, replace as you see fit */
-  background-image: -moz-linear-gradient(top, #333333, #222222);
-  background-image: -ms-linear-gradient(top, #333333, #222222);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333333), to(#222222));
-  background-image: -webkit-linear-gradient(top, #333333, #222222);
-  background-image: -o-linear-gradient(top, #333333, #222222);
-  background-image: linear-gradient(top, #333333, #222222);
-  background-repeat: repeat-x;
 
- /* IE8-9 gradient filter */
- filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333',    endColorstr='#222222', GradientType=0);}
+.videos_list {
+	border: 1px solid grey;
+	margin-left:3%;
+	padding : 10px 10px 10px 10px;
+	width:300px;
+	float:left;
+	h3, p { text-align: center; }
+		img {
+			display: block;
+			margin: 0px auto;
+			}
+	hr {
+	background-color: grey;
+	height: 1px;}
+}
+
+
+.row {
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.notes {
+margin:10px;
+}
+
+
+.selected_video {
+margin-top:100px;
+margin-left:30%;
+}
 
 .container.demo {
   padding-top: 100px;
@@ -32,18 +51,3 @@
   h3, p { text-align: center; }
 }
 
-.welcome {
-    h1{ text-align: center; }
-    padding-top:100px;
-}
-
-.videos_list {
-    h3, p { text-align: center; }
-    img {
-        display: block;
-        margin: 0px auto;
-      }
-}
-
-.selected_video {
-}
