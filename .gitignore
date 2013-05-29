@@ -7,3 +7,5 @@
 .idea
 twovidzoneclip.iml
 target
+bdd.properties
+vertx.bat
