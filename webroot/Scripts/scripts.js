@@ -11,6 +11,7 @@ $(document).ready(function(){
        $("#vidplayer").attr("src", getEmbedUrl(videoID)); 
    };
 
+<<<<<<< HEAD
    getVideos(1,2);
    function getVideos(page, numberOfResult)
    {
@@ -38,3 +39,12 @@ $(document).ready(function(){
              }  
    };
 });
+=======
+    /*for (var i = 0; i < videosList.length; i++) {
+        var object = videosList[i];
+        var soundID = object.soundUrl;
+        var videoID = object.imageUrl; 
+        alert("video : " + videoID + " sound : " + soundID);
+    }*/
+});
+>>>>>>> Ajout favicon + customization theme
