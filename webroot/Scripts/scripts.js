@@ -11,7 +11,6 @@ $(document).ready(function(){
        $("#vidplayer").attr("src", getEmbedUrl(videoID)); 
    };
 
-<<<<<<< HEAD
    getVideos(1,2);
    function getVideos(page, numberOfResult)
    {
@@ -33,18 +32,15 @@ $(document).ready(function(){
                  var videoID = object.imageUrl;
                  var li = document.createElement("li");
                  li.appendChild(document.createTextNode(soundID + " " + videoID));
-                 //li.onclick = function() { playVideos(soundID,videoID); };
-                 li.onclick = function() { playVideos('TGspSCgvygw','iPrnduGtgmc')};
+                 li.onclick = function() { playVideos(soundID,videoID); };
+                 //li.onclick = function() { playVideos('TGspSCgvygw','iPrnduGtgmc')};
                  $("#videosList").append(li);
              }  
    };
 });
-=======
     /*for (var i = 0; i < videosList.length; i++) {
         var object = videosList[i];
         var soundID = object.soundUrl;
         var videoID = object.imageUrl; 
         alert("video : " + videoID + " sound : " + soundID);
     }*/
-});
->>>>>>> Ajout favicon + customization theme
