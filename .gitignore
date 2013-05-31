@@ -10,3 +10,5 @@ target
 bdd.properties
 vertx.bat
 Thumbs.db
+.netrc
+_netrc
