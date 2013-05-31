@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 function getVideos(page, numberOfResult)
 {
-    var url = 'http://ks3099240.kimsufi.com:8182/videoresources/'+page+'/'+numberOfResult;
+    var url = '/videoresources/'+page+'/'+numberOfResult;
     $.get(url, function(json) {
      videosList = jQuery.parseJSON(json);
      if(videosList !== null){
