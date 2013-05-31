@@ -17,10 +17,12 @@ function getVideos(page, numberOfResult)
 function createVideosList(videosList)
 {
   for (var i = 0; i < videosList.length; i++) {
+              var videonb = i + 1;
               var object = videosList[i];
+              var title = object.title;
               var soundID = object.soundUrl;
               var videoID = object.imageUrl;
-              $("#videosList").append("<input type=\"button\" onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\"video "+i+1+"\">");
+              $("#videosList").append("<input type=\"button\" onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\""+title+"\">");
           }  
 };
 

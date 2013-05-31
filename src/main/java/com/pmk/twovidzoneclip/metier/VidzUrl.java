@@ -10,11 +10,14 @@ public class VidzUrl {
     private final String imageUrl;
 
     private final String soundUrl;
+    
+    private final String title;
 
-    public VidzUrl(final Date date, final String imageUrl, final String soundUrl) {
+    public VidzUrl(final Date date, final String imageUrl, final String soundUrl, final String title) {
         this.date = date;
         this.imageUrl = imageUrl;
         this.soundUrl = soundUrl;
+        this.title = title;
     }
 
     public String getImageUrl() {
@@ -24,11 +27,15 @@ public class VidzUrl {
     public String getSoundUrl() {
         return soundUrl;
     }
+    
+    public String getTitle() {
+        return title;
+    }
 
     public Date getDate() {
         return date;
     }
-
+    
     public void setDate(Date date) {
         this.date = date;
     }
@@ -42,6 +49,7 @@ public class VidzUrl {
 
         return Objects.equals(vidzUrl.getImageUrl(), this.getImageUrl())
                 && Objects.equals(vidzUrl.getSoundUrl(), this.getSoundUrl())
-                && Objects.equals(vidzUrl.getDate().toString(), this.getDate().toString());
+                && Objects.equals(vidzUrl.getDate().toString(), this.getDate().toString())
+                && Objects.equals(vidzUrl.getTitle(), this.getTitle());
     }
 }
