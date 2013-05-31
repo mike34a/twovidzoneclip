@@ -20,7 +20,7 @@ function createVideosList(videosList)
               var object = videosList[i];
               var soundID = object.soundUrl;
               var videoID = object.imageUrl;
-              $("#videosList").append("<input type=\"button\" onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\"video "+i+"\">");
+              $("#videosList").append("<input type=\"button\" onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\"video "+i+1+"\">");
           }  
 };
 
