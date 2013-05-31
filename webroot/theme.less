@@ -11,7 +11,7 @@
 
 
 .videos_list {
-	border: 1px solid grey;
+	
 	margin-left:3%;
 	padding : 10px 10px 10px 10px;
 	width:300px;
@@ -25,6 +25,15 @@
 	hr {
 	background-color: grey;
 	height: 1px;}
+	
+	  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+
+  -moz-box-shadow: 4px 4px 14px #000;
+  -webkit-box-shadow: 4px 4px 14px #000;
+  box-shadow: 4px 4px 14px #000;
+	
 }
 
 
@@ -37,10 +46,57 @@ margin-bottom:10px;
 margin:10px;
 }
 
+.control_button {
+
+
+	border : solid 1px #479FEC;
+	border-radius : 6px;
+	moz-border-radius : 6px;
+	font-size : 20px;
+	color : white;
+	padding : 1px 17px;
+	background : #68ACE8;
+	background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#AFCEE9), color-stop(100%,#479FEC));
+	background : -moz-linear-gradient(top, #AFCEE9 0%, #479FEC 100%);
+	background : -webkit-linear-gradient(top, #AFCEE9 0%, #479FEC 100%);
+	background : -o-linear-gradient(top, #AFCEE9 0%, #479FEC 100%);
+	background : -ms-linear-gradient(top, #AFCEE9 0%, #479FEC 100%);
+	background : linear-gradient(top, #AFCEE9 0%, #479FEC 100%);
+	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='#AFCEE9', endColorstr='#479FEC',GradientType=0 );
+
+}
 
 .selected_video {
 margin-top:100px;
 margin-left:30%;
+height : 500px;
+width : 900px;
+padding : 20px;
+
+
+
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+
+  -moz-box-shadow: 4px 4px 14px #000;
+  -webkit-box-shadow: 4px 4px 14px #000;
+  box-shadow: 4px 4px 14px #000;
+
+  
+}
+
+.selected_video_button {
+float:top;
+margin-bottom : 30px;
+}
+
+.vidplayer {
+float:left;
+}
+
+.soundplayer {
+margin: 30px;
 }
 
 .container.demo {
