@@ -21,7 +21,7 @@ function createVideosList(videosList)
               var title = object.title;
               var soundID = object.soundUrl;
               var videoID = object.imageUrl;
-              $("#videosList").append("<input type=\"button\" onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\""+title+"\">");
+			  $("#videosList").append("<div><p>"+title+"</p><a onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\""+title+"\"><img src=\"img/pellicule.jpg\"></a></div>");		
           }  
 };
 
