@@ -22,7 +22,7 @@ function onYouTubeIframeAPIReady() {
       playerVars: { 'autoplay': 0, 'controls': 0 },
       events: {
         'onReady': onSoundPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onSoundPlayerStateChange
       },
       params:{ allowScriptAccess: "always" }
     });
@@ -35,7 +35,7 @@ function onYouTubeIframeAPIReady() {
         playerVars: { 'autoplay': 0, 'controls': 0 },
         events: {
           'onReady': onVideoPlayerReady,
-          'onStateChange': onPlayerStateChange
+          'onStateChange': onVideoPlayerStateChange
         },
         params:{ allowScriptAccess: "always" }
         });
@@ -43,10 +43,10 @@ function onYouTubeIframeAPIReady() {
 
 // 3. The API will call this function when the video player is ready.
 function onSoundPlayerReady(event) {
-  event.target.playVideo();
+  event.target.pauseVideo();
 }
 function onVideoPlayerReady(event) {
-  event.target.playVideo();
+  event.target.pauseVideo();
   event.target.mute();
 }
 
@@ -54,86 +54,71 @@ function onVideoPlayerReady(event) {
 //    The function indicates that when playing a video (state=1),
 //    the player should play for six seconds and then stop.
 
-function onPlayerStateChange(event) {
+function onVideoPlayerStateChange(event) {
   //alert(event.data);
   if (event.data == YT.PlayerState.PLAYING) {
-    //setTimeout(stopVideo, 6000);
-    //alert("play");
-    callPlayer('soundplayer', 'playVideo');
-    callPlayer('vidplayer', 'playVideo');
+    //callPlayer("soundplayer","playVideo");
   }
   
-  if ((event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.BUFFERING )) {
-    //alert("pause buffering");
-    callPlayer('soundplayer', 'pauseVideo');
-    callPlayer('vidplayer', 'pauseVideo');
+  if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.BUFFERING) {
+    //callPlayer('soundplayer', 'pauseVideo');
   }
   
   if (event.data == YT.PlayerState.ENDED) {
-    //alert("stop");
-    callPlayer('soundplayer', 'stopVideo');
-    callPlayer('vidplayer', 'stopVideo');
+    //callPlayer('soundplayer', 'stopVideo');
   }
 }
 
+function onSoundPlayerStateChange(event) {
+  //alert(event.data);
+  if (event.data == YT.PlayerState.PLAYING) {
+      //callPlayer("vidplayer","playVideo");
+  }
+  
+  if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.BUFFERING) {
+    //callPlayer('vidplayer', 'pauseVideo');
+  }
+  
+  if (event.data == YT.PlayerState.ENDED) {
+    //callPlayer('vidplayer', 'stopVideo');
+  }
+}
+
+function playPlayers() {
+    callPlayer("vidplayer","playVideo");
+    callPlayer("soundplayer","playVideo");
+}
+
+function pausePlayers() {
+    callPlayer("vidplayer","pauseVideo");
+    callPlayer("soundplayer","pauseVideo");    
+}
+
+function stopPlayers() {
+    callPlayer("vidplayer","stopVideo");
+    callPlayer("soundplayer","stopVideo");    
+}
+/*
+ * @author       Rob W (http://stackoverflow.com/a/7513356/938089
+ * @description  Executes function on a framed YouTube video (see previous link)
+ *               For a full list of possible functions, see:
+ *               http://code.google.com/apis/youtube/js_api_reference.html
+ * @param String frame_id The id of (the div containing) the frame
+ * @param String func     Desired function to call, eg. "playVideo"
+ * @param Array  args     (optional) List of arguments to pass to function func*/
 function callPlayer(frame_id, func, args) {
     if (window.jQuery && frame_id instanceof jQuery) frame_id = frame_id.get(0).id;
     var iframe = document.getElementById(frame_id);
     if (iframe && iframe.tagName.toUpperCase() != 'IFRAME') {
         iframe = iframe.getElementsByTagName('iframe')[0];
     }
-    
-    if (!callPlayer.queue) callPlayer.queue = {};
-    var queue = callPlayer.queue[frame_id],
-        domReady = document.readyState == 'complete';
-
-    if (domReady && !iframe) {
-        
-        window.console && console.log('callPlayer: Frame not found; id=' + frame_id);
-        if (queue) clearInterval(queue.poller);
-    } else if (func === 'listening') {
-        
-        if (iframe && iframe.contentWindow) {
-            func = '{"event":"listening","id":' + JSON.stringify(''+frame_id) + '}';
-            iframe.contentWindow.postMessage(func, '*');
-        }
-    } else if (!domReady || iframe && (!iframe.contentWindow || queue && !queue.ready)) {
-        if (!queue) queue = callPlayer.queue[frame_id] = [];
-        queue.push([func, args]);
-        if (!('poller' in queue)) {
-            
-            queue.poller = setInterval(function() {
-                callPlayer(frame_id, 'listening');
-            }, 250);
-            
-            messageEvent(1, function runOnceReady(e) {
-                var tmp = JSON.parse(e.data);
-                if (tmp && tmp.id == frame_id && tmp.event == 'onReady') {
-                    
-                    clearInterval(queue.poller);
-                    queue.ready = true;
-                    messageEvent(0, runOnceReady);
-                    
-                    while (tmp = queue.shift()) {
-                        callPlayer(frame_id, tmp[0], tmp[1]);
-                    }
-                }
-            }, false);
-        }
-    } else if (iframe && iframe.contentWindow) {
-        if (func.call) return func();
+    if (iframe) {
+        // Frame exists, 
         iframe.contentWindow.postMessage(JSON.stringify({
             "event": "command",
             "func": func,
             "args": args || [],
             "id": frame_id
         }), "*");
-    }
-    function messageEvent(add, listener) {
-        var w3 = add ? window.addEventListener : window.removeEventListener;
-        w3 ?
-            w3('message', listener, !1)
-        :
-            (add ? window.attachEvent : window.detachEvent)('onmessage', listener);
     }
 }

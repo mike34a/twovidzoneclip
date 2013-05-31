@@ -17,7 +17,6 @@ function getVideos(page, numberOfResult)
 function createVideosList(videosList)
 {
   for (var i = 0; i < videosList.length; i++) {
-              var videonb = i + 1;
               var object = videosList[i];
               var title = object.title;
               var soundID = object.soundUrl;
