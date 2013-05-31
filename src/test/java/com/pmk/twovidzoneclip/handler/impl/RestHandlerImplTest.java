@@ -96,8 +96,8 @@ public class RestHandlerImplTest {
 
         final String sendFileCalledMessage = "links correctly written";
 
-        final VidzUrl vidzUrl1 = new VidzUrl(new Date(), "image1", "sound1");
-        final VidzUrl vidzUrl2 = new VidzUrl(new Date(), "image2", "sound2");
+        final VidzUrl vidzUrl1 = new VidzUrl(new Date(), "image1", "sound1","title1");
+        final VidzUrl vidzUrl2 = new VidzUrl(new Date(), "image2", "sound2","title2");
         final ArrayList<VidzUrl> vidzsLists = Lists.newArrayList(vidzUrl1, vidzUrl2);
 
         final String gsonResults = gson.toJson(vidzsLists);
@@ -128,8 +128,8 @@ public class RestHandlerImplTest {
 
         final String sendFileCalledMessage = "no links written";
 
-        final VidzUrl vidzUrl1 = new VidzUrl(new Date(), "image1", "sound1");
-        final VidzUrl vidzUrl2 = new VidzUrl(new Date(), "image2", "sound2");
+        final VidzUrl vidzUrl1 = new VidzUrl(new Date(), "image1", "sound1","title1");
+        final VidzUrl vidzUrl2 = new VidzUrl(new Date(), "image2", "sound2","title2");
         final ArrayList<VidzUrl> vidzsLists = Lists.newArrayList(vidzUrl1, vidzUrl2);
 
         when(mockService.findVidzUrls(Mockito.anyInt(), Mockito.anyInt())).thenReturn(vidzsLists);

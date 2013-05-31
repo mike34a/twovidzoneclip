@@ -64,8 +64,8 @@ public class VidzUrlsDAOImplTest {
         calendar1.set(2013, 04, 27, 15, 36);
         final Calendar calendar2 = Calendar.getInstance();
         calendar2.set(2013, 04, 26, 16, 45);
-        final VidzUrl vidzUrl1 = new VidzUrl(calendar1.getTime(), "lemonde.fr", "korben.info");
-        final VidzUrl vidzUrl2 = new VidzUrl(calendar2.getTime(), "google.fr", "youtube.com");
+        final VidzUrl vidzUrl1 = new VidzUrl(calendar1.getTime(), "XsoTIvDxgZI", "FE0XcdM22Yo","Scatman Rabbi Jacob");
+        final VidzUrl vidzUrl2 = new VidzUrl(calendar2.getTime(), "fCWNMWQzoz0", "dxZqHff44Js","La soupe aux choux Israelienne");
 
         //WHEN
         final List<VidzUrl> urls = vidzUrlsDAO.getUrls(1, 10);
@@ -93,8 +93,8 @@ public class VidzUrlsDAOImplTest {
     }
 
     private ViewResponse mockedViewRows() {
-        final ViewRowNoDocs viewRowNoDocs1 = new ViewRowNoDocs("2", "201305271536", "{\"imageUrl\":\"lemonde.fr\",\"soundUrl\":\"korben.info\"}");
-        final ViewRowNoDocs viewRowNoDocs2 = new ViewRowNoDocs("1", "201305261645", "{\"imageUrl\":\"google.fr\",\"soundUrl\":\"youtube.com\"}");
+        final ViewRowNoDocs viewRowNoDocs1 = new ViewRowNoDocs("1", "201305261536", "{\"imageUrl\":\"XsoTIvDxgZI\",\"soundUrl\":\"FE0XcdM22Yo\",\"title\":\"Scatman Rabbi Jacob\"}");
+        final ViewRowNoDocs viewRowNoDocs2 = new ViewRowNoDocs("2", "201305271646", "{\"imageUrl\":\"fCWNMWQzoz0\",\"soundUrl\":\"dxZqHff44Js\",\"title\":\"La soupe aux choux Israelienne\"}");
 
         final LinkedList<ViewRow> viewRowNoDocses = Lists.newLinkedList();
         viewRowNoDocses.add(viewRowNoDocs1);
