@@ -16,10 +16,10 @@ function onYouTubeIframeAPIReady() {
     
     var soundplayer;
     soundplayer = new YT.Player('soundplayer', {
-      height: '0',
-      width: '0',
+      height: '200',
+      width: '200',
       videoId: soundUrl,
-      playerVars: { 'autoplay': 0},
+      playerVars: { 'autoplay': 0, 'controls': 0 },
       events: {
         'onReady': onSoundPlayerReady,
         'onStateChange': onPlayerStateChange
@@ -32,7 +32,7 @@ function onYouTubeIframeAPIReady() {
         height: '390',
         width: '640',
         videoId: videoUrl,
-        playerVars: { 'autoplay': 0, 'controls': 1 },
+        playerVars: { 'autoplay': 0, 'controls': 0 },
         events: {
           'onReady': onVideoPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -43,10 +43,10 @@ function onYouTubeIframeAPIReady() {
 
 // 3. The API will call this function when the video player is ready.
 function onSoundPlayerReady(event) {
-  event.target.pauseVideo();
+  event.target.playVideo();
 }
 function onVideoPlayerReady(event) {
-  event.target.pauseVideo();
+  event.target.playVideo();
   event.target.mute();
 }
 
