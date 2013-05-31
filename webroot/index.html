@@ -41,41 +41,6 @@
   </nav>
 </nav>
 
-<!--
-<section class="container demo">
-  <article class"row">
-    <img src="Kickstrap/img/logo.png" /> 
-    <h3>Welcome in Two Vidz One Clip !</h3>
-    <p>Begin creating your site by copying in snippets from the <a href="http://twitter.github.com/bootstrap/">Bootstrap library.</a></p>
-  </article>
-</section>
--->
-<!-- TODO Add this form to the site
-<section class="container demo">
-    <article class="row">
-        <h1>Welcome to 2vidz1Clip</h1>
-        <p class="description">Here's how it works : 
-            <br/>. Choose any youtube video that has a cool soundtrack
-            <br/>. Spot a funny dancing video
-            <br/>. Click on proceed and enjoy
-        </p>
-        <form class="urls_form">
-            <ul class="urls_list">
-                <li>Fill the sound link here<input type="text" name="sound_url"/></li>
-                <li>Fill the video link here<input type="text" name="video_url"/></li>
-            </ul>
-            <input type="submit" class="submit_button" name="submit_form" value="Proceed !"/>
-        </form>
-    </article>
-</section>
--->
-<!--
-<section class="welcome">
-    <article class="row">
-        <h1>Welcome to 2Vidz1Clip !</h1>
-    </article>
-</section>
--->
 <section class="videos_list">
     <h3>Please select the video you want to watch</h3>
 	<hr>
@@ -91,8 +56,14 @@
 			<input type="button" class="control_button" onclick="pausePlayers();" value="Pause">
 			<input type="button" class="control_button" onclick="stopPlayers();" value="Stop">
 		</div>
-        <div class="vidplayer" id="vidplayer"></div>
-        <div class="soundplayer" id="soundplayer"></div>
+        <div class="video">
+            <div class="vidplayer" id="vidplayer"></div>
+            <a href="#" id="videoLink">Video Link</a>
+        </div>
+        <div class="sound">
+            <div class="soundplayer" id="soundplayer"></div>
+            <a href="#" id="videoLink">Sound Link</a>
+        </div>
     </section>
 
 
