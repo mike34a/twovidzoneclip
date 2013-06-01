@@ -43,7 +43,7 @@ public class VidzUrlsDAOImplTest {
     }
 
     @Test
-    @Ignore
+    @Ignore(value = "Should be executed with a flat database (i.e. a file)")
     public void should_find_no_results_for_the_tenth_page() {
         //WHEN
         final ViewResponse viewRows = vidzUrlsDAO.vidzUrlsViewResponse(10, 10);
@@ -53,6 +53,7 @@ public class VidzUrlsDAOImplTest {
     }
 
     @Test
+    @Ignore(value = "Should be executed with a flat database (i.e. a file)")
     public void should_build_object_correctly_from_json() {
         //GIVEN
         couchbaseClient = mock(CouchbaseClient.class);

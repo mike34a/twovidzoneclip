@@ -34,7 +34,6 @@ public final class RestHandlerImpl implements RestHandler {
             
             final String serializedVidzUrls = vidzUrls(pageStr, numberOfResultsStr);
             
-            //final String serializedVidzUrls = "[{\"imageUrl\":\"<datasimage>\",\"soundUrl\":\"<datassound>\"},{\"imageUrl\":\"<datasimage2>\",\"soundUrl\":\"<datassound2>\"}]";
             req.response.putHeader("content-length" , serializedVidzUrls.length());
             req.response.write(serializedVidzUrls);
             req.response.end();
@@ -46,7 +45,9 @@ public final class RestHandlerImpl implements RestHandler {
         Integer page = paramsAreCorrect ? Integer.parseInt(pageStr) : 0;
         Integer numberOfPages = paramsAreCorrect ? Integer.parseInt(numberOfResultsStr) : 0;
 
-        return paramsAreCorrect && vidzUrlsService != null ? gson.toJson(vidzUrlsService.findVidzUrls(page, numberOfPages)) : "";
+        return paramsAreCorrect && vidzUrlsService != null ?
+                gson.toJson(vidzUrlsService.findVidzUrls(page, numberOfPages)) :
+                "";
     }
 
 
