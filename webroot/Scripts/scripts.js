@@ -27,6 +27,6 @@ function playVideos(soundID, videoID) {
 }
 
 function getEmbedUrl(url) {
-    return 'http://www.youtube.com/embed/' + url + '?autoplay=0&amp;controls=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2F127.0.0.1%3A8182';
+    return 'http://www.youtube.com/embed/' + url + '?autoplay=0&amp;controls=0&amp;enablejsapi=1&amp;%3A8182';
 }
    
