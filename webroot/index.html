@@ -23,29 +23,46 @@
   <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 <!--! END KICKSTRAP HEADER --> 
 
-
+ <!--! ENTETE -->
 <nav class="navbar navbar-fixed-top">
   <nav class="navbar-inner">
-    <section class="container">
-      <a class="brand">Welcome to 2Vidz1Clip !</a>
-    </section>
+   
+      <div class="titre">
+		2Vidz1Clip
+		</div>
+    
   </nav>
 </nav>
 
+ <!--! LISTE DE SELECTION DES VIDEOS -->
 <section class="videos_list">
     
 	<div class="miniature" id="videosList">    
 	</div>  
 </section>
-<section class="selected_video">    
-    <div class="selected_video_button">
-			<input type="button" class="control_button" onclick="playPlayers();" value="Start">
-			<input type="button" class="control_button" onclick="pausePlayers();" value="Pause">
-			<input type="button" class="control_button" onclick="stopPlayers();" value="Stop">
-	</div>        
-    <div class="vidplayer" id="vidplayer"></div>
-    <div class="soundplayer" id="soundplayer"></div>  
+
+ <!--! VIDEO SELECTIONNEE -->
+<section class="selected_video">
+	<div class="soundplayer" id="soundplayer"></div> 
+    <div class="vid1">
+		<center>
+		<div class="titre_selected_video" id="title">Israëli Günther</div>
+		<div class="vidplayer" id="vidplayer"></div>
+		<div class="selected_video_button">
+				<input type="button" class="control_button" onclick="playPlayers();" value="Start">
+				<input type="button" class="control_button" onclick="pausePlayers();" value="Pause">
+				<input type="button" class="control_button" onclick="stopPlayers();" value="Stop">
+		</div>    
+		</center>		
+	</div>
+     
 	
+</section>
+
+<section>
+	<div class="slogan">
+	Make your own machups !
+	</div>
 </section>
 
 

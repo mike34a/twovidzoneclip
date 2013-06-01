@@ -2,16 +2,50 @@
 // -----------
 
 @import "Kickstrap/themes/cerulean/variables.less";		
-@import "Kickstrap/themes/cerulean/bootswatch.less";		
+@import "Kickstrap/themes/cerulean/bootswatch.less";	
+@font-face {
+    font-family: 'slogan';
+    src: url("/font/Tangerine_Bold.ttf");
+}
+	
 // Replace the path with any .less file in the 'themes' folder.
 
 // Tweak your current theme here, or comment-out the predefined theme from settings
 // and start fresh below.
 
+.titre {
+	margin-left : 170px;
+	margin-top : 15px;
+	color:white;
+	font-size : 30px;
+	text-align : left;
+	font-family:"comic sans ms";
+	div { float:left;}
+}
+
+
+.titre_selected_video {
+	margin-bottom:20px;
+	margin-top:25px;
+	font-size:25px;
+	text-shadow: 0px 8px 20px black;
+	
+}
+
+.slogan{
+	float:right;
+	margin: 30px 100px 20px  20px ;
+	color:#656A69;
+	font-family:"slogan";
+	font-size:30px;
+}
+
+.vid1 {
+	display: inline-block;
+}
 
 .videos_list {
 	margin-left:3%;
-	margin-bottom : 20px;
 	padding : 2%;
 	width:20%;
 	float:left;
@@ -20,20 +54,22 @@
 	color:#479FEC;	
 	div {
 	margin-top:30px;
+	img:hover{
+	background-color:white;
 	}
-	hr {
-	background-color: grey;
-	height: 1px;}
+	}
 	 -moz-border-radius: 12px;
 	 -webkit-border-radius: 12px;
 	 border-radius: 12px;
-	-moz-box-shadow: 4px 4px 14px #000;
+	 -moz-box-shadow: 4px 4px 14px #000;
 	 -webkit-box-shadow: 4px 4px 14px #000;
 	 box-shadow: 4px 4px 14px #000;
 }
 
 .miniature{
 	margin-left:5%;
+		color:#656A69;
+	font-family:"comic sans ms"
 }
 
 .row {
@@ -49,6 +85,7 @@
 	margin-bottom : 5%;
 }
 .control_button {
+	margin: 10px;
 	border : solid 1px #479FEC;
 	border-radius : 6px;
 	moz-border-radius : 6px;
@@ -68,8 +105,8 @@
 .selected_video {
 	margin-top:100px;
 	margin-left:30%;
-	width : 60%;
-	height : 800px;
+	width : 1000px;
+	height : 600px;
 	padding : 20px;
    -moz-border-radius: 12px;
    -webkit-border-radius: 12px;
@@ -81,9 +118,13 @@
 
 .vidplayer {
 	float:left;
+	margin-left:50px;
+	margin-top:45px;
 }
 
 .soundplayer {
-	margin: 5%;
-}
+	float:right; 
+	margin-top : 190px;
+	margin-right:50px;
+	}
 
