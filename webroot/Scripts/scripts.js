@@ -1,5 +1,5 @@
 $(document).ready(function(){    
-   getVideos(1,2);
+   getVideos(1,10);
 });
 
 function getVideos(page, numberOfResult)
@@ -21,7 +21,7 @@ function createVideosList(videosList)
               var title = object.title;
               var soundID = object.soundUrl;
               var videoID = object.imageUrl;
-			  $("#videosList").append("<div><p>"+title+"</p><a onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\""+title+"\"><img src=\"//i1.ytimg.com/vi/"+videoID+"/default.jpg\"></a></div>");		
+			  $("#videosList").append("<div><p>"+title+"</p><a onclick=\"playVideos('"+soundID+"','"+videoID+"');\" value=\""+title+"\"><img class=\"miniature\" src=\"//i2.ytimg.com//vi/"+videoID+"/mqdefault.jpg\" width=\"90%\" /></a></div>");		
           }  
 };
 

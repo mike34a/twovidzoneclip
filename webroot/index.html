@@ -24,15 +24,6 @@
 <!--! END KICKSTRAP HEADER --> 
 
 
-
-
-
-
-
-
-
-
-
 <nav class="navbar navbar-fixed-top">
   <nav class="navbar-inner">
     <section class="container">
@@ -42,37 +33,26 @@
 </nav>
 
 <section class="videos_list">
-    <h3>Please select the video you want to watch</h3>
-	<hr>
-    <div id="videosList">      
-    </div>   
-	<hr>
-	<img src="img/pellicule.jpg" alt="logo"/>
+    
+	<div class="miniature" id="videosList">    
+	</div>  
 </section>
 <section class="selected_video">    
-    
-		<div class="selected_video_button">
+    <div class="selected_video_button">
 			<input type="button" class="control_button" onclick="playPlayers();" value="Start">
 			<input type="button" class="control_button" onclick="pausePlayers();" value="Pause">
 			<input type="button" class="control_button" onclick="stopPlayers();" value="Stop">
-		</div>
-        <div class="video">
-            <div class="vidplayer" id="vidplayer"></div>
-            <a href="#" id="videoLink">Video Link</a>
-        </div>
-        <div class="sound">
-            <div class="soundplayer" id="soundplayer"></div>
-            <a href="#" id="videoLink">Sound Link</a>
-        </div>
-    </section>
-
+	</div>        
+    <div class="vidplayer" id="vidplayer"></div>
+    <div class="soundplayer" id="soundplayer"></div>  
+	
+</section>
 
 
   <!--! KICKSTRAP FOOTER -->
    <div class="hidden"><h1>No Stylesheet Loaded</h1><p><strong>Could not load Kickstrap.</strong>There are <a href="http://getkickstrap.com/docs/1.2/troubleshooting/#lessjs-errors">several common reasons for this error.</a></p></div>
   <div id="push"></div></div> <!-- sf-wrapper -->
   <footer class="container" id="footer">
-    <a href="http://getkickstrap.com"><img src="Kickstrap/img/badge.png" /></a>
   </footer>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="Kickstrap/js/jquery-1.8.2.min.js"><\/script>');</script>
