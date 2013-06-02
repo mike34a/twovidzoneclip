@@ -31,14 +31,23 @@ public class VidzUrlsDAOImpl implements VidzUrlsDAO {
         gson = new Gson();
     }
 
-    public List<VidzUrl> getUrls(final Integer page, final Integer numberOfResults) {
+    public List<VidzUrl> getUrlsForTheNthPage(final Integer page, final Integer numberOfResults) {
         final ViewResponse viewResponse = vidzUrlsViewResponse(page, numberOfResults);
+        final List<VidzUrl> results = getVidzUrls(viewResponse);
+        return results;
+    }
 
+    private List<VidzUrl> getVidzUrls(ViewResponse viewResponse) {
         final List<VidzUrl> results = new LinkedList<>();
+
         for (ViewRow viewRow : viewResponse) {
             final VidzUrl vidzUrl = gson.fromJson(viewRow.getValue(), VidzUrl.class);
-            vidzUrl.setDate(dateFromStr(viewRow.getKey()));
-            results.add(vidzUrl);
+            final Date vidzDate = dateFromStr(viewRow.getKey());
+
+            if (vidzDate != null) {
+                vidzUrl.setDate(vidzDate);
+                results.add(vidzUrl);
+            }
         }
 
         return results;
@@ -58,6 +67,10 @@ public class VidzUrlsDAOImpl implements VidzUrlsDAO {
 
     @VisibleForTesting
     Date dateFromStr(String dateStr) {
+        if (dateStr == null || !dateStr.matches("[0-9]{12}")) {
+            return null;
+        }
+
         final String year = dateStr.substring(0, 4);
         final String month = dateStr.substring(4, 6);
         final String day = dateStr.substring(6, 8);

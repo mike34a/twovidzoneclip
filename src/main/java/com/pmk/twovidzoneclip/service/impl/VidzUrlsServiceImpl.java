@@ -18,6 +18,6 @@ public final class VidzUrlsServiceImpl implements VidzUrlsService {
 
     @Override
     public final List<VidzUrl> findVidzUrls(final Integer page, Integer numberOfResults) {
-        return vidzUrlsDAO.getUrls(page, numberOfResults);
+        return vidzUrlsDAO.getUrlsForTheNthPage(page, numberOfResults);
     }
 }

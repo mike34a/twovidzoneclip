@@ -52,4 +52,14 @@ public class VidzUrl {
                 && Objects.equals(vidzUrl.getDate().toString(), this.getDate().toString())
                 && Objects.equals(vidzUrl.getTitle(), this.getTitle());
     }
+
+    @Override
+    public String toString() {
+        return "VidzUrl{" +
+                "date=" + date +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", soundUrl='" + soundUrl + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
