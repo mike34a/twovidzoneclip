@@ -7,6 +7,10 @@
     font-family: 'slogan';
     src: url("/font/Tangerine_Bold.ttf");
 }
+@font-face {
+	font-family: 'belligerent';
+    src: url("/font/belligerent.ttf");
+}
 	
 // Replace the path with any .less file in the 'themes' folder.
 
@@ -19,7 +23,7 @@
 	color:white;
 	font-size : 30px;
 	text-align : left;
-	font-family:"comic sans ms";
+	font-family:"belligerent";
 	div { float:left;}
 }
 
@@ -36,14 +40,36 @@
 	float:right;
 	color:#656A69;
 	font-family:"slogan";
-	font-size:30px;
+	font-size:50px;
 }
 
 .vid1 {
 	display: inline-block;
 }
 
+	.videos_list div::-webkit-scrollbar {									
+	width: 14px;
+	height: 14px;
+	}
+	.videos_list div::-webkit-scrollbar-thumb  {   /* barre coulissante */ 
+	background:white;
+    -webkit-box-shadow: inset 0 0 6px #45aee9;
+	}
+	
+	.videos_list div::-webkit-scrollbar-thumb:hover {					
+	background: #E6E6E6;
+	-webkit-box-shadow: inset 0 0 6px #45aee9;
+	
+	}
+	
+	.videos_list div::-webkit-scrollbar-track { /*barre derrière ascenseur*/
+    background:#E6E6E6;
+	}
+	
+
 .videos_list {
+
+	
 	margin-left:3%;
 	padding : 2%;
 	width:20%;
@@ -52,13 +78,13 @@
 	h3, p { text-align: center; }
 	color:#479FEC;	
 	div {
-	height:600px;
-	overflow:auto;
-	margin-top:15px;
-	img:hover{
-	background-color:white;
-	}
-	}
+		height:600px;
+		overflow:auto;
+		margin-top:15px;
+		img:hover{
+			background-color:white;
+			}
+		}	
 	 -moz-border-radius: 12px;
 	 -webkit-border-radius: 12px;
 	 border-radius: 12px;
