@@ -69,3 +69,11 @@ function tabs(divid, linkid) {
         $("#tabs-about").hide();
     $('#' + divid).show();
 }
+
+//Description : Adds a mashup to the database
+//args
+//videoLink : Link to the youtube video as video
+//soundLink : Link to the youtube video as sound
+function addVideo(videoLink,soundLink) {    
+    alert(videoLink+' '+soundLink);
+}
