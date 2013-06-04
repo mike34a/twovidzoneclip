@@ -56,9 +56,9 @@ public final class RestHandlerImpl implements RestHandler {
             String reponse;
 
             if (vidzUrlsService.addVideo(title, videoID, soundID)) {
-                reponse = "Video added successfully";
+                reponse = "success";
             } else {
-                reponse = "There was a problem adding your video";
+                reponse = "fail";
             }
 
             req.response.putHeader("content-length", reponse.length());

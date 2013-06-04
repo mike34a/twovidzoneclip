@@ -79,22 +79,24 @@
 
             <div style="display : none" id="tabs-add">
                 <div class="selected_video"> <!--Todo : Change this-->
-                    <div id="add_div_title">
+                    <div id="add_form">
                         <p>Mashup Title</p>
-                        <input type="text" id="add_video_title"/>
-                    </div>
-                    <div id="add_div_video">
+                        <input type="text" onblur="isEmpty($('#title_error'), this.value);" id="add_video_title"/>
+                        <p id="title_error" class="error" style="display:none">Title can not be empty</p>
                         <p>Video link</p>
                         <input type="text" onblur="checkYoutubeUrl($('#video_link_error'), this.value);" id="add_video_link"/>
                         <p id="video_link_error" class="error" style="display:none">Please type a valid youtube url</p>
-                    </div>
-                    <div id="add_div_sound">
                         <p>Sound link</p>
                         <input type="text" onblur="checkYoutubeUrl($('#sound_link_error'), this.value);" id="add_sound_link"/>
                         <p id="sound_link_error" class="error" style="display:none">Please type a valid youtube url</p>
+                        <br/>
+                        <input type="button" onclick="addVideo($('#add_video_title').val(), $('#add_video_link').val(), $('#add_sound_link').val())" value="Create mashup"/>
                     </div>
-                    <br/>
-                    <input type="button" onclick="addVideo($('#add_video_title').val(), $('#add_video_link').val(), $('#add_sound_link').val())" value="Create mashup"/>
+                    <div id="validation" style="display:none">
+                        <p id="fail_add_message" class="error" style="display:none">It seems one of your video is either not valid or not readable out of Youtube :( Please try again with another</p>
+                        <p id="success_add_message" class="success" style="display:none">Your video has been added !</p>
+                        <input type="button" onclick="displayAddForm();" value="Add another video"/>
+                    </div>
                 </div>
             </div>
             <div style="display : none" id="tabs-about">

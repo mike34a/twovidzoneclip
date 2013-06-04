@@ -75,12 +75,21 @@ function tabs(divid, linkid) {
 //title : Title of the mashup
 //videoLink : Link to the youtube video as video
 //soundLink : Link to the youtube video as sound
-function addVideo(title,videoLink,soundLink) {    
-    if(validForm()){    
+function addVideo(title, videoLink, soundLink) {
+    if (validForm()) {
         var encodedVideoLink = getYoutubeLink(videoLink);
         var encodedSoundLink = getYoutubeLink(soundLink);
-        $.get('/addvideo/' + title + '/' + encodedVideoLink + '/' + encodedSoundLink,function(data) {
-            alert(data);
+        $.get('/addvideo/' + title + '/' + encodedVideoLink + '/' + encodedSoundLink, function(data) {
+            $("#validation").show();
+            $("#add_form").hide();
+            if (data === "success") {
+                $("#success_add_message").show();
+                $("#add_video_link").val("");
+                $("#add_sound_link").val("");
+                $("#add_video_title").val("");
+            }
+            else
+                $("#fail_add_message").show();
         });
     }
 }
@@ -93,43 +102,66 @@ function isInputAYoutubeUrl(input) {
     if (urlregex.test(input)) {
         return (true);
     }
-    else return (false);
+    else
+        return (false);
 }
 
 //Description : Encode and url to be passed to the server
 //args
 //input url : The url to be encoded
 function getYoutubeLink(url) {
-    var link = url.replace(/\//g, "");
-    link = link.replace(/\?/g, "");
+    var link = url.replace(/\//g, "&");
+    link = link.replace(/\?/g, "&");
     return link;
 }
 
 //Description : field validator for youtube urls
 //args
-//input msgID : Id of the error message
+//msgID : Id of the error message
 //url : The url to check
-function checkYoutubeUrl(msgID,url) {
-    if(!isInputAYoutubeUrl(url)) {
+function checkYoutubeUrl(msgID, url) {
+    if (!isInputAYoutubeUrl(url)) {
         msgID.show();
     }
-    else msgID.hide();
+    else
+        msgID.hide();
 }
 
+//Description : field validator for title
+//args
+//msgID : Id of the error message
+//text : the text to check
+function isEmpty(msgID, text) {
+    if (text === "")
+        msgID.show();
+    else
+        msgID.hide();
+}
 
 //Description : Valids the input fields for the add form. TODO : refactor
 function validForm() {
     var valid = true;
-    
-    if(!isInputAYoutubeUrl($("#add_video_link").val())) {
+
+    if ($("#add_video_title").val === "") {
+        valid = false;
+        $("#title_error").show();
+    }
+
+    if (!isInputAYoutubeUrl($("#add_video_link").val())) {
         valid = false;
         $("#video_link_error").show();
     }
-    
-    if(!isInputAYoutubeUrl($("#add_sound_link").val())) {
+
+    if (!isInputAYoutubeUrl($("#add_sound_link").val())) {
         valid = false;
         $("#sound_link_error").show();
     }
-    
+
     return valid;
+}
+
+//Description : Hides the validation div and displays add form
+function displayAddForm() {
+    $("#validation").hide();
+    $("#add_form").show();
 }

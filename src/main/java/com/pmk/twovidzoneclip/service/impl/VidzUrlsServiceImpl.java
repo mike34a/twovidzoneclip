@@ -29,6 +29,7 @@ public final class VidzUrlsServiceImpl implements VidzUrlsService {
     public Boolean addVideo(String title, String videoID, String soundID) {
         YouTubeManager ym = new YouTubeManager();
         try {
+            System.out.println(videoID+" "+soundID);
             if("invalid url".equals(videoID) || "invalid url".equals(soundID) || !ym.checkUrl(videoID) || !ym.checkUrl(soundID)) return false;
         } catch (Exception ex) {
             Logger.getLogger(VidzUrlsServiceImpl.class.getName()).log(Level.SEVERE, null, ex);

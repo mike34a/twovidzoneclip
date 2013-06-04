@@ -8,7 +8,7 @@ public class YouTubeTester {
   
         String clientID = "2vidz1Clip";
         String validVideo = "3fGgoWNBQZ0";
-        String notValidVideo = "nr2enzcl83o";
+        String notValidVideo = "Ypx_PRk1f_Q";
         int maxResults = 1;
         boolean filter = true;
         int timeout = 2000;
