@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface VidzUrlsDAO {
     List<VidzUrl> getUrlsForTheNthPage(Integer page, Integer numberOfResults);
+    Boolean addVideo(String title, String videoID, String soundID);
 }

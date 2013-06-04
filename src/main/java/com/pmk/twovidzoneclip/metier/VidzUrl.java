@@ -1,11 +1,13 @@
 package com.pmk.twovidzoneclip.metier;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 public class VidzUrl {
 
-    private transient Date date;
+    private Date date;
 
     private final String imageUrl;
 
@@ -61,5 +63,22 @@ public class VidzUrl {
                 ", soundUrl='" + soundUrl + '\'' +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    public String toJson() {
+        final DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        final String strDate = dateFormat.format(date);
+
+        return "{"
+                + "  \"date\": \"" + strDate 
+                + "\", \"image_url\": \"" 
+                + imageUrl + "\", \"sound_url\": \"" 
+                + soundUrl + "\",\"title\": \"" 
+                + title 
+                + "\"}";
+    }
+    
+    public String getKey() {
+        return imageUrl+" "+soundUrl;
     }
 }

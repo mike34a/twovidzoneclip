@@ -72,8 +72,23 @@ function tabs(divid, linkid) {
 
 //Description : Adds a mashup to the database
 //args
+//title : Title of the mashup
 //videoLink : Link to the youtube video as video
 //soundLink : Link to the youtube video as sound
-function addVideo(videoLink,soundLink) {    
-    alert(videoLink+' '+soundLink);
+function addVideo(title,videoLink,soundLink) {    
+    //alert(title+' '+videoLink+' '+soundLink);
+    var encodedVideoLink = encodeURIComponent(videoLink);
+    var encodedSoundLink = encodeURIComponent(soundLink);
+    $.get('/addvideo/' + title + '/' + encodedVideoLink + '/' + encodedSoundLink,function(data) {
+        alert(data);
+    });
+    //var urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'; 
+}
+
+function isInputAYoutubeUrl(url) {
+    var urlregex = new RegExp("^(https?:\/\/www.youtube.com|www.youtube.com){1}([0-9A-Za-z]+\.)");
+    if (urlregex.test(url)) {
+        return (true);
+    }
+    return (false);
 }

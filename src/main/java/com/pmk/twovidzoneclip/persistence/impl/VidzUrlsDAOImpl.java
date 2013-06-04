@@ -83,4 +83,13 @@ public class VidzUrlsDAOImpl implements VidzUrlsDAO {
 
         return calendar.getTime();
     }
+
+    @Override
+    public Boolean addVideo(String title, String videoID, String soundID) {
+        final Date date = new Date();
+        final VidzUrl video = new VidzUrl(date, videoID, soundID, title);
+        
+        couchbaseClient.add(video.getKey(),0,video.toJson());
+        return true;
+    }
 }

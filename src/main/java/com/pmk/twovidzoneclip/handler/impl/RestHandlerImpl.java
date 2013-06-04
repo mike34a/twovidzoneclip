@@ -8,12 +8,13 @@ import com.pmk.twovidzoneclip.service.VidzUrlsService;
 import org.vertx.java.core.http.HttpServerRequest;
 
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class RestHandlerImpl implements RestHandler {
 
     @VisibleForTesting
     VidzUrlsService vidzUrlsService;
-
     private static final Gson gson = new Gson();
 
     @Inject
@@ -25,17 +26,43 @@ public final class RestHandlerImpl implements RestHandler {
     public final void handle(final HttpServerRequest req) {
         final String pageKey = "page";
         final String numberOfResultsKey = "numberOfResults";
+
+        final String mashupTitleKey = "title";
+        final String videoLinkKey = "video";
+        final String soundLinkKey = "sound";
+
         final Map<String, String> params = req.params();
 
         if (params.containsKey(pageKey) && params.containsKey(numberOfResultsKey)) {
 
             final String pageStr = params.get(pageKey);
             final String numberOfResultsStr = params.get(numberOfResultsKey);
-            
+
             final String serializedVidzUrls = vidzUrls(pageStr, numberOfResultsStr);
-            
-            req.response.putHeader("content-length" , serializedVidzUrls.length());
+
+            req.response.putHeader("content-length", serializedVidzUrls.length());
             req.response.write(serializedVidzUrls);
+            req.response.end();
+        }
+
+        if (params.containsKey(mashupTitleKey) && params.containsKey(videoLinkKey) && params.containsKey(soundLinkKey)) {
+            final String title = params.get(mashupTitleKey);
+            final String videoLink = params.get(videoLinkKey);
+            final String soundLink = params.get(soundLinkKey);
+
+            final String videoID = getIDFromUrl(videoLink);
+            final String soundID = getIDFromUrl(soundLink);
+
+            String reponse;
+
+            if (vidzUrlsService.addVideo(title, videoID, soundID)) {
+                reponse = "Video added successfully";
+            } else {
+                reponse = "Video not added " + videoID + " " + soundID;
+            }
+
+            req.response.putHeader("content-length", reponse.length());
+            req.response.write(reponse);
             req.response.end();
         }
     }
@@ -45,15 +72,29 @@ public final class RestHandlerImpl implements RestHandler {
         Integer page = paramsAreCorrect ? Integer.parseInt(pageStr) : 0;
         Integer numberOfPages = paramsAreCorrect ? Integer.parseInt(numberOfResultsStr) : 0;
 
-        return paramsAreCorrect && vidzUrlsService != null ?
-                gson.toJson(vidzUrlsService.findVidzUrls(page, numberOfPages)) :
-                "";
+        return paramsAreCorrect && vidzUrlsService != null
+                ? gson.toJson(vidzUrlsService.findVidzUrls(page, numberOfPages))
+                : "";
     }
-
 
     @VisibleForTesting
     boolean checkPageNumberFormat(final String strChecked) {
         final String pattern = "[0-9]+";
         return strChecked.matches(pattern);
+    }
+
+    private String getIDFromUrl(String url) {
+        //http://www.youtube.com/watch?feature=player_embedded&v=TGspSCgvygw&blabla
+        Pattern pattern = Pattern.compile("^.*&v=(.*?)&.*$");
+        Matcher matcher = pattern.matcher(url);
+        String id = new String();
+        try {
+            while (matcher.find()) {
+                id = matcher.group();
+            }
+        } catch (RuntimeException e) {
+            id = "invalid url";
+        }
+        return id;
     }
 }

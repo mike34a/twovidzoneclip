@@ -79,12 +79,14 @@
 
             <div style="display : none" id="tabs-add">
                 <div class="selected_video"> <!--Todo : Change this-->
+                    <p>Mashup Title</p>
+                    <input type="text" id="add_video_title"/>
                     <p>Video link</p>
-                    <input type="text" id="add_video_link">
+                    <input type="text" id="add_video_link"/>
                     <p>Sound link</p>
-                    <input type="text" id="add_sound_link">
+                    <input type="text" id="add_sound_link"/>
                     <br/>
-                    <input type="button" onclick="addVideo($('#add_video_link').val(),$('#add_sound_link').val())" value="Create mashup"/>
+                    <input type="button" onclick="addVideo($('#add_video_title').val(),$('#add_video_link').val(),$('#add_sound_link').val())" value="Create mashup"/>
                 </div>
             </div>
             <div style="display : none" id="tabs-about">

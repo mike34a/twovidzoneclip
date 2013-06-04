@@ -35,6 +35,7 @@ public final class VertxServer extends Verticle {
             webHandler = new WebHandlerImpl();
         } finally {
             routeMatcher.get("/videoresources/:page/:numberOfResults", restHandler);
+            routeMatcher.get("/addvideo/:title/:video/:sound", restHandler);
             routeMatcher.getWithRegEx(".*", webHandler);
             vertx.createHttpServer().requestHandler(
                     routeMatcher).listen(PORT_NUMBER);
