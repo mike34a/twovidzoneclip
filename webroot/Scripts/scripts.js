@@ -77,18 +77,27 @@ function tabs(divid, linkid) {
 //soundLink : Link to the youtube video as sound
 function addVideo(title,videoLink,soundLink) {    
     //alert(title+' '+videoLink+' '+soundLink);
-    var encodedVideoLink = encodeURIComponent(videoLink);
-    var encodedSoundLink = encodeURIComponent(soundLink);
+    var encodedVideoLink = getYoutubeLink(videoLink);
+    var encodedSoundLink = getYoutubeLink(soundLink);
     $.get('/addvideo/' + title + '/' + encodedVideoLink + '/' + encodedSoundLink,function(data) {
         alert(data);
     });
     //var urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'; 
 }
 
-function isInputAYoutubeUrl(url) {
+//Description : Check if the input is a valid youtube url
+//args
+//input : Input text
+function isInputAYoutubeUrl(input) {
     var urlregex = new RegExp("^(https?:\/\/www.youtube.com|www.youtube.com){1}([0-9A-Za-z]+\.)");
-    if (urlregex.test(url)) {
+    if (urlregex.test(input)) {
         return (true);
     }
     return (false);
+}
+
+function getYoutubeLink(url) {
+    var link = url.replace(/\//g, "");
+    link = link.replace(/\?/g, "");
+    return link;
 }

@@ -87,14 +87,19 @@ public final class RestHandlerImpl implements RestHandler {
         //http://www.youtube.com/watch?feature=player_embedded&v=TGspSCgvygw&blabla
         Pattern pattern = Pattern.compile("^.*&v=(.*?)&.*$");
         Matcher matcher = pattern.matcher(url);
-        String id = new String();
-        try {
-            while (matcher.find()) {
-                id = matcher.group();
-            }
-        } catch (RuntimeException e) {
-            id = "invalid url";
+        int i = 0;
+        boolean found = matcher.find();
+        if(found) {
+            return matcher.group(1);
         }
-        return id;
+        else{
+            pattern = Pattern.compile("^.*&v=(.*?)$");
+            matcher = pattern.matcher(url);
+            found = matcher.find();
+            if(found) {
+                return matcher.group(1);
+            }
+            else return "invalid url";
+        }
     }
 }
