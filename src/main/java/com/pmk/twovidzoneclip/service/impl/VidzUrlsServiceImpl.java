@@ -6,8 +6,6 @@ import com.pmk.twovidzoneclip.service.VidzUrlsService;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class VidzUrlsServiceImpl implements VidzUrlsService {
 

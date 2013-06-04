@@ -79,14 +79,22 @@
 
             <div style="display : none" id="tabs-add">
                 <div class="selected_video"> <!--Todo : Change this-->
-                    <p>Mashup Title</p>
-                    <input type="text" id="add_video_title"/>
-                    <p>Video link</p>
-                    <input type="text" id="add_video_link"/>
-                    <p>Sound link</p>
-                    <input type="text" id="add_sound_link"/>
+                    <div id="add_div_title">
+                        <p>Mashup Title</p>
+                        <input type="text" id="add_video_title"/>
+                    </div>
+                    <div id="add_div_video">
+                        <p>Video link</p>
+                        <input type="text" onblur="checkYoutubeUrl($('#video_link_error'), this.value);" id="add_video_link"/>
+                        <p id="video_link_error" class="error" style="display:none">Please type a valid youtube url</p>
+                    </div>
+                    <div id="add_div_sound">
+                        <p>Sound link</p>
+                        <input type="text" onblur="checkYoutubeUrl($('#sound_link_error'), this.value);" id="add_sound_link"/>
+                        <p id="sound_link_error" class="error" style="display:none">Please type a valid youtube url</p>
+                    </div>
                     <br/>
-                    <input type="button" onclick="addVideo($('#add_video_title').val(),$('#add_video_link').val(),$('#add_sound_link').val())" value="Create mashup"/>
+                    <input type="button" onclick="addVideo($('#add_video_title').val(), $('#add_video_link').val(), $('#add_sound_link').val())" value="Create mashup"/>
                 </div>
             </div>
             <div style="display : none" id="tabs-about">

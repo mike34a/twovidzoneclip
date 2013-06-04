@@ -76,28 +76,60 @@ function tabs(divid, linkid) {
 //videoLink : Link to the youtube video as video
 //soundLink : Link to the youtube video as sound
 function addVideo(title,videoLink,soundLink) {    
-    //alert(title+' '+videoLink+' '+soundLink);
-    var encodedVideoLink = getYoutubeLink(videoLink);
-    var encodedSoundLink = getYoutubeLink(soundLink);
-    $.get('/addvideo/' + title + '/' + encodedVideoLink + '/' + encodedSoundLink,function(data) {
-        alert(data);
-    });
-    //var urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'; 
+    if(validForm()){    
+        var encodedVideoLink = getYoutubeLink(videoLink);
+        var encodedSoundLink = getYoutubeLink(soundLink);
+        $.get('/addvideo/' + title + '/' + encodedVideoLink + '/' + encodedSoundLink,function(data) {
+            alert(data);
+        });
+    }
 }
 
 //Description : Check if the input is a valid youtube url
 //args
 //input : Input text
 function isInputAYoutubeUrl(input) {
-    var urlregex = new RegExp("^(https?:\/\/www.youtube.com|www.youtube.com){1}([0-9A-Za-z]+\.)");
+    var urlregex = new RegExp("^(http:\/\/www.youtube.com|www.youtube.com){1}([0-9A-Za-z]+\.)?");
     if (urlregex.test(input)) {
         return (true);
     }
-    return (false);
+    else return (false);
 }
 
+//Description : Encode and url to be passed to the server
+//args
+//input url : The url to be encoded
 function getYoutubeLink(url) {
     var link = url.replace(/\//g, "");
     link = link.replace(/\?/g, "");
     return link;
+}
+
+//Description : field validator for youtube urls
+//args
+//input msgID : Id of the error message
+//url : The url to check
+function checkYoutubeUrl(msgID,url) {
+    if(!isInputAYoutubeUrl(url)) {
+        msgID.show();
+    }
+    else msgID.hide();
+}
+
+
+//Description : Valids the input fields for the add form. TODO : refactor
+function validForm() {
+    var valid = true;
+    
+    if(!isInputAYoutubeUrl($("#add_video_link").val())) {
+        valid = false;
+        $("#video_link_error").show();
+    }
+    
+    if(!isInputAYoutubeUrl($("#add_sound_link").val())) {
+        valid = false;
+        $("#sound_link_error").show();
+    }
+    
+    return valid;
 }
