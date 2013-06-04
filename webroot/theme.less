@@ -17,17 +17,22 @@
 // Tweak your current theme here, or comment-out the predefined theme from settings
 // and start fresh below.
 
+//classe de la div contenant les menus dans la barre de navigation
+.menus {
+margin-left:100px;
+margin-top : 15px;
+}
+// style du titre dans la navbar 
 .titre {
-	margin-left : 170px;
 	margin-top : 15px;
 	color:white;
 	font-size : 30px;
-	text-align : left;
+	text-align : center;
 	font-family:"belligerent";
-	div { float:left;}
+	
 }
 
-
+//style du titre de la vidéo selectionnee
 .titre_selected_video {
 	margin-bottom:20px;
 	margin-top:25px;
@@ -36,6 +41,7 @@
 	
 }
 
+//style du slogan make ur own mashups
 .slogan{
 	float:right;
 	color:#656A69;
@@ -43,10 +49,12 @@
 	font-size:50px;
 }
 
+//style du div comprennant le titre de la video selectionnee + le lecteur video + les boutons de controle
 .vid1 {
 	display: inline-block;
 }
 
+// style de kla scrollbar de la liste des vidéos
 	.videos_list div::-webkit-scrollbar {									
 	width: 14px;
 	height: 14px;
@@ -66,10 +74,9 @@
     background:#E6E6E6;
 	}
 	
-
+//style de la section de la liste des vidéos
 .videos_list {
 
-	
 	margin-left:3%;
 	padding : 2%;
 	width:20%;
@@ -106,6 +113,7 @@
 	margin-bottom : 5%;
 }
 
+//style boutons
 .control_button {
 	margin: 10px;
 	border : solid 1px #479FEC;
@@ -124,6 +132,7 @@
 	filter : progid:DXImageTransform.Microsoft.gradient( startColorstr='#AFCEE9', endColorstr='#479FEC',GradientType=0 );
 }
 
+//style de la section de la vidéo selectionnee
 .selected_video {
 	margin-top:85px;
 	margin-left:30%;
@@ -138,6 +147,7 @@
    box-shadow: 4px 4px 14px #000;
 }
 
+//style du div empechant de cloquer sur la video
 .cachevid {
 margin-left:50px;
 margin-top:45px;
@@ -146,6 +156,8 @@ height: 390px;
 width: 640px;
 background-image:url(img/imglecteur.png);
 }
+
+//style du div empechant de cloquer sur le son
 .cacheson {
 margin-left:750px;
 margin-top:190px;
@@ -155,18 +167,21 @@ width: 200px;
 background-image:url(img/imglecteur.png);
 }
 
+//style du player video
 .vidplayer {
 	float:left;
 	margin-left:50px;
 	margin-top:45px;
 }
 
+//style du player son
 .soundplayer {
 	float:right; 
 	margin-top : 190px;
 	margin-right:50px;
 }
 
+//style du slogan make your own mashups
 .div_slogan {
 	width : 1605px;
 	margin-top : 25px;

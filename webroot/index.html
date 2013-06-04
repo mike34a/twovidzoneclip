@@ -28,15 +28,16 @@
             <!--! ENTETE -->
             <nav class="navbar navbar-fixed-top">
                 <nav class="navbar-inner">
-                    <div class="titre">
-                        2Vidz1Clip
-                    </div>
-                    <div id="tabs">
+                    
+                    <div class="menus" id="tabs">
                         <ul class="nav">
                             <li id="link-view" class="active"><a onclick="tabs('tabs-view', 'link-view')" href="#Videos">View</a></li>
                             <li id="link-add"><a onclick="tabs('tabs-add', 'link-add')" href="#Add">Add</a></li>
                             <li id="link-about"><a onclick="tabs('tabs-about', 'link-about')" href="#About">About</a></li>
                         </ul>
+						<ul class="titre">
+						 2Vidz1Clip
+						</ul>
                     </div>
                 </nav>
             </nav>
@@ -90,7 +91,7 @@
                         <input type="text" onblur="checkYoutubeUrl($('#sound_link_error'), this.value);" id="add_sound_link"/>
                         <p id="sound_link_error" class="error" style="display:none">Please type a valid youtube url</p>
                         <br/>
-                        <input type="button" onclick="addVideo($('#add_video_title').val(), $('#add_video_link').val(), $('#add_sound_link').val())" value="Create mashup"/>
+                        <input type="button" class="control_button" onclick="addVideo($('#add_video_title').val(), $('#add_video_link').val(), $('#add_sound_link').val())" value="Create mashup"/>
                     </div>
                     <div id="validation" style="display:none">
                         <p id="fail_add_message" class="error" style="display:none">It seems one of your video is either not valid or not readable out of Youtube :( Please try again with another</p>
