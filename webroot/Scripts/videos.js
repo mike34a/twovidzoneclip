@@ -1,20 +1,8 @@
 //Description : Video Class
-function cVideo( title, video, sound ){
-	this.title = title;
-	this.video = video;
-        this.sound = sound;
-
-	$( this ).bind( "getTitle", function(){
-		return this.title;
-	});
-        
-        $( this ).bind( "getVideo", function(){
-		return this.video;
-	});
-        
-        $( this ).bind( "getSound", function(){
-        return this.sound;
-	});
+function cVideo(title, video, sound) {
+    this.title = title;
+    this.video = video;
+    this.sound = sound;
 }
 
 ////Description : Loads a list of videos
@@ -41,19 +29,22 @@ function feedVideosList(page, numberOfResult) {
 
 function getFirstVideo() {
     var url = '/videoresources/1/1';
+    var firstVid;
+    $.ajax({
+        url: url,
+        async: false,
+        dataType: 'json',
+        success: function(videosList) {
+            if (videosList !== null) {
+                $.each(videosList, function(key, value) {
+                    firstVid = new cVideo(value.title, value.imageUrl, value.soundUrl);
+                });
+            }
+            else
+                console.log("Bad json");
 
-    $.getJSON(url, function(videosList) {
-        if (videosList !== null) {
-            $.each(videosList, function(key, value) {
-                var title = value.title;
-                var soundID = value.soundUrl;
-                var videoID = value.imageUrl;
-                $("#videosList").append("<p>" + title + "</p><a href=\"#\" onclick=\"playVideos('" + title + "','" + soundID + "','" + videoID + "');\" value=\"" + title + "\"><img class=\"miniature\" src=\"//i2.ytimg.com//vi/" + videoID + "/mqdefault.jpg\" width=\"90%\" /></a>");
-            });
-        }
-        else
-            console.log("Bad json");
-    });
+        }});
+    return firstVid;
 }
 
 //Description : Loads the embedded players

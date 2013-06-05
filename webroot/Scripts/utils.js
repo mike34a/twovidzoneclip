@@ -48,7 +48,9 @@ function isInputAYoutubeUrl(input) {
         return (false);
 }
 
-function scrollalert(){  
+
+//Description : Dynamic scroll
+function autoScroll(){  
     var scrolltop=$('#scrollbox').scrollTop();  
     var scrollheight=$('#scrollbox').prop("scrollHeight");  
     var windowheight=$('#scrollbox').height();
@@ -59,5 +61,5 @@ function scrollalert(){
         $('#pageNumber').val(newPageNumber);
         feedVideosList(newPageNumber,5);
     }  
-    setTimeout('scrollalert();', 1500);  
+    setTimeout('autoScroll();', 1500);  
 }  

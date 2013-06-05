@@ -1,4 +1,4 @@
 $(document).ready(function() {    
     feedVideosList(1,5);
-    scrollalert();
+    autoScroll();
 });

@@ -11,8 +11,14 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function onYouTubeIframeAPIReady() {
 
-    var soundUrl = 'iPrnduGtgmc';
-    var videoUrl = 'TGspSCgvygw';
+    //var soundUrl = 'iPrnduGtgmc';
+    //var videoUrl = 'TGspSCgvygw';
+    
+    var vid = getFirstVideo();
+    
+    var soundUrl = vid.sound;
+    var videoUrl = vid.video;
+    $("#title").text(vid.title);
     
     var soundplayer;
     soundplayer = new YT.Player('soundplayer', {
