@@ -82,7 +82,7 @@ function addVideo(title, videoLink, soundLink) {
     }
 }
 
-//Description : get the player in fullscreen
+//Description : get an element in fullscreen
 function doFullScreen() {
     
     
@@ -94,7 +94,7 @@ function doFullScreen() {
         }
         else {
             screenfull.request(target);
-            setVideoPlayerSize($(window).width(),$(window).height())
+            setVideoPlayerSize($(window).width(),$(window).height());
         }
     }
 }
@@ -106,4 +106,11 @@ function doFullScreen() {
 function setVideoPlayerSize(width,height) {
     $("#vidplayer").attr('width', width);
     $("#vidplayer").attr('height', height);
+}
+
+function stylePlayers() {
+    $("#vidplayer").css( "margin", "10px" );
+    $("#vidplayer").css( "-webkit-border-radius", "50px;" );
+    $("#vidplayer").css( "-moz-border-radius", "50px" );
+    $("#vidplayer").css( "border-radius", "50px" );
 }

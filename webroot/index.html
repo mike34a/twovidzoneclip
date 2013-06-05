@@ -31,9 +31,9 @@
 
                     <div class="menus" id="tabs">
                         <ul class="nav">
-                            <li id="link-view" class="active"><a onclick="tabs('tabs-view', 'link-view')" href="#Videos">View</a></li>
-                            <li id="link-add"><a onclick="tabs('tabs-add', 'link-add')" href="#Add">Add</a></li>
-                            <li id="link-about"><a onclick="tabs('tabs-about', 'link-about')" href="#About">About</a></li>
+                            <li id="link-view" class="active"><a onclick="tabs('tabs-view', 'link-view')" href="#">View</a></li>
+                            <li id="link-add"><a onclick="tabs('tabs-add', 'link-add')" href="#">Add</a></li>
+                            <li id="link-about"><a onclick="tabs('tabs-about', 'link-about')" href="#">About</a></li>
                         </ul>
                         <div class="titre">
                             2Vidz1Clip
@@ -64,9 +64,9 @@
                                 <div class="vidplayer" id="vidplayer"></div>
                                 <div class="cachevid"></div>
                                 <div class="selected_video_button">
-                                    <input type="button" class="control_button" onclick="playPlayers();" value="Start">
-                                    <input type="button" class="control_button" onclick="pausePlayers();" value="Pause">
-                                    <input type="button" id="fullscreenbtn" onclick="doFullScreen();" class="control_button" value="Full Screen">
+                                    <a href="#"><img width="20" height="20" src="img/play.png" class="control_button" onclick="playPlayers();"></a>
+                                    <a href="#"><img width="20" height="20" src="img/pause.png" class="control_button" onclick="pausePlayers();" ></a>
+                                    <a href="#"><img width="20" height="20" src="img/fs.png" id="fullscreenbtn" onclick="doFullScreen();" class="control_button"></a>
                                 </div>
                             </div>
                         </center>		

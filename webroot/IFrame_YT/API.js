@@ -37,6 +37,7 @@ function onYouTubeIframeAPIReady() {
         vidplayer = new YT.Player('vidplayer', {
         height: '390',
         width: '640',
+        style: 'margin:10px; -webkit-border-radius: 50px; -moz-border-radius: 50px; border-radius: 50px;',
         videoId: videoUrl,
         playerVars: { 'autoplay': 0, 'controls': 0 },
         events: {
@@ -54,6 +55,7 @@ function onSoundPlayerReady(event) {
 function onVideoPlayerReady(event) {
   event.target.pauseVideo();
   event.target.mute();
+  stylePlayers();
 }
 
 // 4. The API calls this function when the player's state changes.
