@@ -81,3 +81,29 @@ function addVideo(title, videoLink, soundLink) {
         });
     }
 }
+
+//Description : get the player in fullscreen
+function doFullScreen() {
+    
+    
+    var target = $('#forFullScreen')[0];
+    if (screenfull.enabled) {
+        if (screenfull.isFullscreen) {
+            setVideoPlayerSize(640,390);
+            screenfull.exit();
+        }
+        else {
+            screenfull.request(target);
+            setVideoPlayerSize($(window).width(),$(window).height())
+        }
+    }
+}
+
+//Description : resets the video player size
+//args
+//width : the new width of the player
+//height : the new height of the player
+function setVideoPlayerSize(width,height) {
+    $("#vidplayer").attr('width', width);
+    $("#vidplayer").attr('height', height);
+}
