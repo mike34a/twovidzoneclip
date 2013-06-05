@@ -1,28 +1,22 @@
-//Description : Calls a json file containing a list of videos
+//Description : Loads a list of videos
 //args
-//page : the page number
-//numberOfResult : the number of results per page
-function getVideos(page, numberOfResult) {
+//page : number of the page to reach
+//numberOfResult : number of videos to get
+function feedVideosList(page, numberOfResult) {
+
     var url = '/videoresources/' + page + '/' + numberOfResult;
 
     $.getJSON(url, function(videosList) {
         if (videosList !== null) {
-            createVideosList(videosList);
+            $.each(videosList, function(key, value) {
+                var title = value.title;
+                var soundID = value.soundUrl;
+                var videoID = value.imageUrl;
+                $("#videosList").append("<p>" + title + "</p><a href=\"#\" onclick=\"playVideos('" + title + "','" + soundID + "','" + videoID + "');\" value=\"" + title + "\"><img class=\"miniature\" src=\"//i2.ytimg.com//vi/" + videoID + "/mqdefault.jpg\" width=\"90%\" /></a>");
+            });
         }
         else
             console.log("Bad json");
-    });
-}
-
-//Description : Loads a list of videos
-//args
-//videoList : json List of the videos
-function createVideosList(videosList) {
-    $.each(videosList, function(key, value) {
-        var title = value.title;
-        var soundID = value.soundUrl;
-        var videoID = value.imageUrl;
-        $("#videosList").append("<p>" + title + "</p><a href=\"#\" onclick=\"playVideos('" + title + "','" + soundID + "','" + videoID + "');\" value=\"" + title + "\"><img class=\"miniature\" src=\"//i2.ytimg.com//vi/" + videoID + "/mqdefault.jpg\" width=\"90%\" /></a>");
     });
 }
 

@@ -55,8 +55,9 @@ function scrollalert(){
     var scrolloffset=1;  
     if(scrolltop>=(scrollheight-(windowheight+scrolloffset)))  
     {  
-        //fetch new items  
-            $('#videosList').append("<p>newitems</p>");  
+        var newPageNumber = parseInt($('#pageNumber').val())+1;
+        $('#pageNumber').val(newPageNumber);
+        feedVideosList(newPageNumber,5);
     }  
     setTimeout('scrollalert();', 1500);  
 }  

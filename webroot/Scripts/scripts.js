@@ -1,4 +1,4 @@
 $(document).ready(function() {    
-    getVideos(1, 10);
+    feedVideosList(1,5);
     scrollalert();
 });
