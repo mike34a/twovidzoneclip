@@ -26,3 +26,37 @@ function tabs(divid, linkid) {
         $("#tabs-about").hide();
     $('#' + divid).show();
 }
+
+//Description : Encode and url to be passed to the server
+//args
+//input url : The url to be encoded
+function getYoutubeLink(url) {
+    var link = url.replace(/\//g, "&");
+    link = link.replace(/\?/g, "&");
+    return link;
+}
+
+//Description : Check if the input is a valid youtube url
+//args
+//input : Input text
+function isInputAYoutubeUrl(input) {
+    var urlregex = new RegExp("^(http:\/\/www.youtube.com|www.youtube.com){1}([0-9A-Za-z]+\.)?");
+    if (urlregex.test(input)) {
+        return (true);
+    }
+    else
+        return (false);
+}
+
+function scrollalert(){  
+    var scrolltop=$('#scrollbox').scrollTop();  
+    var scrollheight=$('#scrollbox').prop("scrollHeight");  
+    var windowheight=$('#scrollbox').height();
+    var scrolloffset=1;  
+    if(scrolltop>=(scrollheight-(windowheight+scrolloffset)))  
+    {  
+        //fetch new items  
+            $('#videosList').append("<p>newitems</p>");  
+    }  
+    setTimeout('scrollalert();', 1500);  
+}  

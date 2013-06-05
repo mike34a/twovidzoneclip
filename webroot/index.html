@@ -28,16 +28,16 @@
             <!--! ENTETE -->
             <nav class="navbar navbar-fixed-top">
                 <nav class="navbar-inner">
-                    
+
                     <div class="menus" id="tabs">
                         <ul class="nav">
                             <li id="link-view" class="active"><a onclick="tabs('tabs-view', 'link-view')" href="#Videos">View</a></li>
                             <li id="link-add"><a onclick="tabs('tabs-add', 'link-add')" href="#Add">Add</a></li>
                             <li id="link-about"><a onclick="tabs('tabs-about', 'link-about')" href="#About">About</a></li>
                         </ul>
-						<ul class="titre">
-						 2Vidz1Clip
-						</ul>
+                        <div class="titre">
+                            2Vidz1Clip
+                        </div>
                     </div>
                 </nav>
             </nav>
@@ -45,9 +45,10 @@
             <div id="tabs-view" style="display : block">
                 <!--! LISTE DE SELECTION DES VIDEOS -->
                 <section class="videos_list">
-
-                    <div class="miniature" id="videosList">    
-                    </div>  
+                    <div id="scrollbox" >
+                        <div class="miniature" id="videosList">    
+                        </div>
+                    </div>
                 </section>
 
                 <!--! VIDEO SELECTIONNEE -->
