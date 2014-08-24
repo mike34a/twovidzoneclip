@@ -48,8 +48,6 @@ public class VidzUrlsModule extends AbstractModule {
 
         CouchbaseConnectionFactoryBuilder cfb = new CouchbaseConnectionFactoryBuilder();
 
-        initViewMode();
-
         cfb.setOpTimeout(10000);
 
         final CouchbaseConnectionFactory cf;
@@ -65,9 +63,4 @@ public class VidzUrlsModule extends AbstractModule {
         }
     }
 
-    private static void initViewMode() {
-        if (!System.getProperties().containsKey("viewmode")) {
-            System.setProperty("viewmode", "development");
-        }
-    }
 }
