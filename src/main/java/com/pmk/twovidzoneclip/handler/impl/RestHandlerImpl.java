@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.pmk.twovidzoneclip.handler.RestHandler;
 import com.pmk.twovidzoneclip.service.VidzUrlsService;
+import org.vertx.java.core.MultiMap;
 import org.vertx.java.core.http.HttpServerRequest;
 
 import java.util.Map;
@@ -31,21 +32,21 @@ public final class RestHandlerImpl implements RestHandler {
         final String videoLinkKey = "video";
         final String soundLinkKey = "sound";
 
-        final Map<String, String> params = req.params();
+        final MultiMap params = req.params();
 
-        if (params.containsKey(pageKey) && params.containsKey(numberOfResultsKey)) {
+        if (params.contains(pageKey) && params.contains(numberOfResultsKey)) {
 
             final String pageStr = params.get(pageKey);
             final String numberOfResultsStr = params.get(numberOfResultsKey);
 
             final String serializedVidzUrls = vidzUrls(pageStr, numberOfResultsStr);
 
-            req.response.putHeader("content-length", serializedVidzUrls.length());
-            req.response.write(serializedVidzUrls);
-            req.response.end();
+            req.response().putHeader("content-length", "" + serializedVidzUrls.length());
+            req.response().write(serializedVidzUrls);
+            req.response().end();
         }
 
-        if (params.containsKey(mashupTitleKey) && params.containsKey(videoLinkKey) && params.containsKey(soundLinkKey)) {
+        if (params.contains(mashupTitleKey) && params.contains(videoLinkKey) && params.contains(soundLinkKey)) {
             final String title = params.get(mashupTitleKey);
             final String videoLink = params.get(videoLinkKey);
             final String soundLink = params.get(soundLinkKey);
@@ -61,9 +62,9 @@ public final class RestHandlerImpl implements RestHandler {
                 reponse = "fail";
             }
 
-            req.response.putHeader("content-length", reponse.length());
-            req.response.write(reponse);
-            req.response.end();
+            req.response().putHeader("content-length", "" + reponse.length());
+            req.response().write(reponse);
+            req.response().end();
         }
     }
 

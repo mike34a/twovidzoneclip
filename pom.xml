@@ -8,31 +8,43 @@
     <url>http://www.twovidzoneclip.com/</url>
 
     <properties>
-        <restlet-version>2.1.2</restlet-version>
-        <restlet-freemarker-version>1.1.9</restlet-freemarker-version>
-        <vertx-version>1.3.1.final</vertx-version>
+        <!-- Set pullInDeps to true if you want any modules specified in the 'includes' and 'deploys' fields
+        in your mod.json to be automatically pulled in during packaging and added inside your module. Doing this means your
+        module won't download and install those dependencies at run-time when they're first requested. -->
+        <vertx.pullInDeps>false</vertx.pullInDeps>
+
+        <!-- Set createFatJar to true if you want to create a fat executable jar which contains the Vert.x binaries
+        along with the module so it can be run with java -jar <jarname> -->
+        <vertx.createFatJar>false</vertx.createFatJar>
+
+        <!--Vertx module name-->
+        <module.name>${project.groupId}~${project.artifactId}~${project.version}</module.name>
+
+        <!-- The directory where the module will be assembled - you can override this on the command line
+        with -Dmods.directory=mydir -->
+        <mods.directory>target/mods</mods.directory>
+
         <couchbase-version>1.1.6</couchbase-version>
         <junit-version>4.11</junit-version>
         <mockito-version>1.9.5</mockito-version>
         <guava-version>14.0.1</guava-version>
         <guice-version>3.0</guice-version>
         <fest-assert-version>1.4</fest-assert-version>
-        <eclipse-plugin-version>2.7</eclipse-plugin-version>
         <vertx-plugin-version>1.3.0.1</vertx-plugin-version>
         <gson-version>2.2.3</gson-version>
         <surefire-version>2.14.1</surefire-version>
-        <view-mode-property>development</view-mode-property>
         <google-api-services-youtube.version>v3-rev53-1.15.0-rc</google-api-services-youtube.version>
         <google-api-client.version>1.3.1-alpha</google-api-client.version>
         <gdata.core.version>1.47.1</gdata.core.version>
+        <vertx.version>2.1.2</vertx.version>
+
+        <maven.compiler.plugin.version>3.0</maven.compiler.plugin.version>
+        <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
+        <maven.vertx.plugin.version>2.0.1-final</maven.vertx.plugin.version>
+        <maven.dependency.plugin.version>2.7</maven.dependency.plugin.version>
     </properties>
 
     <repositories>
-        <repository>
-            <id>maven-restlet</id>
-            <name>Public online Restlet repository</name>
-            <url>http://maven.restlet.org</url>
-        </repository>
         <repository>
             <id>couchbase</id>
             <name>Couchbase Maven Repository</name>
@@ -80,10 +92,25 @@
             <artifactId>junit</artifactId>
             <version>${junit-version}</version>
         </dependency>
+
+        <!--Vertx provided dependencies-->
         <dependency>
-            <groupId>org.vert-x</groupId>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
             <artifactId>vertx-platform</artifactId>
-            <version>${vertx-version}</version>
+            <version>${vertx.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-hazelcast</artifactId>
+            <version>${vertx.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>couchbase</groupId>
@@ -141,7 +168,6 @@
     </dependencies>
 
     <build>
-
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -153,30 +179,96 @@
         </resources>
 
         <plugins>
+            <!-- The vert.x Maven plugin -->
+            <plugin>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-maven-plugin</artifactId>
+                <version>${maven.vertx.plugin.version}</version>
+                <!--
+                You can specify extra config to the plugin as required here
+                <configuration>
+                   <configFile>/path/to/MyVerticle.conf</configFile>
+                   <instances>1</instances>
+                   <classpath>src/main/resources/:src/test/resources/:target/classes/:target/test-classes/</classpath>
+                </configuration>
+                -->
+                <executions>
+                    <execution>
+                        <id>PullInDeps</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>pullInDeps</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Other plugins required by the build -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>${eclipse-plugin-version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.anacoders.plugins</groupId>
-                <artifactId>vertx-maven-plugin</artifactId>
-                <version>${vertx-plugin-version}</version>
-                <configuration>
-                    <verticleName>com.pmk.twovidzoneclip.main.VertxServer</verticleName>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.stuartgunter</groupId>
-                <artifactId>couchbase-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resources.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-mod-to-target</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${mods.directory}/${module.name}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>target/classes</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven.dependency.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-mod-dependencies-to-target</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${mods.directory}/${module.name}/lib</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/mod.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assemble</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <finalName>twovidzoneclip</finalName>

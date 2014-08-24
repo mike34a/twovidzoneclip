@@ -3,21 +3,20 @@ package com.pmk.twovidzoneclip.main;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.ProvisionException;
-import com.pmk.twovidzoneclip.exception.DbException;
 import com.pmk.twovidzoneclip.handler.RestHandler;
 import com.pmk.twovidzoneclip.handler.WebHandler;
 import com.pmk.twovidzoneclip.handler.impl.RestHandlerImpl;
 import com.pmk.twovidzoneclip.handler.impl.WebHandlerImpl;
 import com.pmk.twovidzoneclip.injection.VidzUrlsModule;
 import org.vertx.java.core.http.RouteMatcher;
-import org.vertx.java.deploy.Verticle;
+import org.vertx.java.platform.Verticle;
 
 public final class VertxServer extends Verticle {
 
     private static final Integer PORT_NUMBER = 8182;
 
     @Override
-    public final void start() throws Exception {
+    public final void start() {
         RestHandler restHandler = null;
         WebHandler webHandler = null;
         final RouteMatcher routeMatcher = new RouteMatcher();
