@@ -1,5 +1,8 @@
 twovidzoneclip
 ==============
-Pour les developpements principaux, commiter sur develop
 
-Exemples d'utilisation vert.x : https://github.com/vert-x/vert.x/tree/v1.3.1.final/vertx-examples/src/main/java
+Website allowing visitors to create clips from two youtube links. The first being used for the sound and the second for the image.
+
+Visitors can then rate each other's clips to bring out the best.
+
+Have fun !
